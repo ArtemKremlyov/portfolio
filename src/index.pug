@@ -9,7 +9,188 @@ html(lang="en")
     title Portfolio | main page
   body
     .wrapper
-      .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+     .sections
+      .section.sections-united
+       .section-hi
+        header.header
+         .container.container--header
+          .logo ka
+          ul.header-list
+           li.header-item
+            a(href='#') Главная
+           li.header-item
+            a(href='#') Обо мне
+           li.header-item 
+            a(href='#') Навыки
+           li.header-item
+            a(href='#') Работы
+           li.header-item
+            a(href='#') Отзывы
+           li.header-item
+            a(href='#') Связаться
+          ul.social-list
+           li.social-item
+            +icon('insta', 'social-icon', 'white', '25px', '25px')
+           li.social-item
+            +icon('vk', 'social-icon', 'white', '31px', '31px')
+           li.social-item
+            +icon('github', 'social-icon','white', '23px', '27px')
+        .container.container--hi
+         .section-hi__content
+          .section-hi__info
+           span.tagline Личный сайт вэб разработчика
+           span.name Артем Кремлев
+       .section-about
+        a(href='#').scroll
+         .scroll__text Скролл
+         .scroll__icon
+          +icon('scroll','scroll-icon','white','30px','30px')
+        .container.container--about
+         .personal-info
+          .personal-info__ava
+           +image('content/user.jpg','user-pic')
+          .personal-info__list
+           li.personal-info__item
+            .personal-info__type Проживаю:
+            .personal-info__data Новосибирск
+           li.personal-info__item
+            .personal-info__type Возраст:
+            .personal-info__data 18 лет
+           li.personal-info__item
+            .personal-info__type Родился:
+            .personal-info__data 24 июля 2001
+         .personal-info__text
+          span Привет, меня зовут
+          .personal-info__name Артем Кремлев
+          .personal-info__leisure Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+          .personal-info__school Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+      .section-skills
+       .hands
+        +image('content/hands.png','')
+       .container
+        .section-skills__content
+         .section-skills__info
+          .section-skills__how Чем я могу быть полезен вам
+          .section-skills__school Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+         .section-skills__skills
+          .section-skills__headline Frontend
+          ul.section-skills__list
+           li.section-skills__item
+            .skill-name HTML
+            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+              circle.circle.circle-under(cx='50' cy='50' r='40')
+              circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 105')
+           li.section-skills__item
+            .skill-name CSS
+            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+              circle.circle.circle-under(cx='50' cy='50' r='40')
+              circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 145')
+           li.section-skills__item
+            .skill-name Javascript
+            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+              circle.circle.circle-under(cx='50' cy='50' r='40')
+              circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 207')
+           li.section-skills__item
+            .skill-name jQuery и Vue
+            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+              circle.circle.circle-under(cx='50' cy='50' r='40')
+              circle.circle.circle-above(cx='50' cy='50' r='40'  style='stroke-dashoffset: 187')
+          .section-skills__headline Workflow
+          ul.section-skills__list
+            li.section-skills__item
+             .skill-name Git
+             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+               circle.circle.circle-under(cx='50' cy='50' r='40')
+               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 105')
+            li.section-skills__item
+             .skill-name Terminal
+             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+               circle.circle.circle-under(cx='50' cy='50' r='40')
+               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 145')
+            li.section-skills__item
+             .skill-name Gulp
+             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+               circle.circle.circle-under(cx='50' cy='50' r='40')
+               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 207')
+            li.section-skills__item
+             .skill-name Webpack
+             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+               circle.circle.circle-under(cx='50' cy='50' r='40')
+               circle.circle.circle-above(cx='50' cy='50' r='40'  style='stroke-dashoffset: 187')
+      .section-portfolio
+        .container.container--portfolio
+          .headline Мои работы
+          .portfolio-content
+              .portoflio-review__img
+                 +image('content/big-prev.png','')
+                 .portfolio-preview
+                   ul.portfolio-preview__list
+                    li.portfolio-preview__item.active
+                      +image('content/mini-prev1.png','preview-img active')
+                    li.portfolio-preview__item
+                      +image('content/mini-prev2.png','preview-img')
+                    li.portfolio-preview__item
+                      +image('content/mini-prev3.png','preview-img')
+                    li.portfolio-preview__item
+                      +image('content/mini-prev4.png','preview-img')
+                   .portfolio-preview__control
+                    button.btn-left
+                      .btn-left__icon
+                    button.btn-right
+                      .btn-right__icon
+              .portfolio-info
+                .portfolio-info__number 2
+                ul.tag-list
+                  li.tag-item HTML
+                  li.tag-item CSS
+                  li.tag-item Javascript
+                .portfolio-info__headline Сайт школы образования
+                .portfolio-info__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+                .portfolio-info__link Посмотреть сайт
+      .section-me
+        .container.container--me
+          .slider
+            .slider-control
+              .slider-headline Что обо мне говорят
+              .slider-btns
+                button.slider-btn.slider-btn--left
+                button.slider-btn
+            ul.slider-list
+              li.slider-item
+                .slider-item__column
+                  .slider-item__icon
+                  .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                .slider-item__column
+                  .slider-item__ava
+                    +image('content/autor1.png','autor')
+                  .slider-item__data
+                    .slider-item__name Ковальчук Дмитрий
+                    .slider-item__rang Основатель Loftschool
+              li.slider-item
+                .slider-item__column
+                  .slider-item__icon
+                  .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                .slider-item__column
+                  .slider-item__ava
+                    +image('content/autor2.png','autor')
+                  .slider-item__data
+                    .slider-item__name Владимир Сабанцев
+                    .slider-item__rang Преподаватель
+          form.form
+            .form__row
+              label.form__label
+                .form__text Введите ваше имя
+                input(type='text',name='name').form__input
+              label.form__label
+                .form__text Введите ваш email
+                input(type='text',name='name').form__input
+            .form__row
+              label.form__label
+                .form__text Сообщение к письму
+                input(type="text").form__input
+            button.send-btn Отправить
+     // .maincontent
+     //   +image('content/user.jpg', 'user-pic')
+     //  +icon('link', 'link-class')
+     //   .icon-bg
+     //  .omg.omfg

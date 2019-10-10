@@ -30,10 +30,61 @@ body {
   margin: 0 auto;
   max-width: 1480px;
   width: 95%;
+  height: 100%;
+  align-items: center;
+  display: flex;
   // width: 1490px;
 
+   &--header{
+     display:flex;
+     align-items: flex-end;
+     height: 100%;
+     justify-content: space-around;
+   }
+   &--hi{
+     height: 100%;
+     display: flex;
+     align-items: center;
+   }
+   &--about{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+   &--portfolio{
+     flex-direction: column;
+     justify-content: center;
+   }
+   &--me{
+    flex-direction: column;
+    justify-content: center;
+  }
   @include phones {
     width: 85%;
+  }
+}
+
+.section{
+  &-hi{
+    height: 100vh;
+  }
+  &-about{
+    height: 100vh;
+    padding-top: 40px;
+  }
+  &-skills{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image:url('../images/content/skills-bck.png');
+  }
+  &-portfolio{
+    height: 100vh;
+  }
+  &-me{
+    height: 100vh;
+    background-image: url('../images/content/me-bck.png');
+     background-size: cover;
   }
 }
 
@@ -45,13 +96,17 @@ body {
 button {
   border: 0;
   cursor: pointer;
+
+   &:focus{
+     outline: none;
+   }
 }
 
 * {
   box-sizing: border-box;
 }
 
-ul {
+ul,li {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -80,6 +135,7 @@ button[type="button"] {
 a {
   color: inherit;
   cursor: pointer;
+  text-decoration: none;
 }
 
 img {

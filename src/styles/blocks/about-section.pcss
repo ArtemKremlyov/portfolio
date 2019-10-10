@@ -1,0 +1,84 @@
+.personal-info{
+    width: 285px;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 90px;
+}
+.scroll{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: initial;
+
+     &:hover{
+         .scroll__text{
+             color:purple;
+         }
+         .scroll-icon{
+             fill: purple;
+         }
+     }
+}
+.scroll__text{
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+}
+.personal-info__item{
+    display: flex;
+    margin-bottom: 22px;
+
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+.personal-info__ava{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 70px;
+}
+
+.personal-info__type{
+    opacity: 0.15;
+    color: white;
+}
+.personal-info__data{
+    color: white;
+    margin-left: auto;
+}
+.personal-info__list{
+    width: 250px;
+}
+.personal-info__text{
+   color: white;
+   max-width: 530px;
+    span{
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.5;
+    }
+}
+.personal-info__name{
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 35px;
+}
+.personal-info__leisure{
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.5;
+    margin-bottom: 100px;
+    line-height: 30px;
+}
+.personal-info__school{
+    font-size: 16px;
+    font-style: italic;
+    opacity: 0.5;
+    line-height: 30px;
+}

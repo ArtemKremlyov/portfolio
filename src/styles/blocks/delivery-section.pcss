@@ -1,0 +1,129 @@
+.slider{
+    margin-bottom: 200px;
+}
+.slider-headline{
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+}
+.slider-control{
+    display: flex;
+    margin-bottom: 110px;
+}
+.slider-btns{
+    display: flex;
+    margin-left: 75px;
+}
+.slider-btn{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    border: 2px white solid;
+    background: svg-load('short-arrow.svg', fill=white, width=8px, height=10px) no-repeat center center;
+
+     &--left{
+         transform: rotate(-180deg);
+         margin-right: 20px;
+     }
+}
+.slider-item__icon{
+    background: svg-load('quote.svg', fill=white, width=73px, height=65px) no-repeat;
+    width: 73px;
+    height: 65px;
+    opacity: 0.05;
+}
+.slider-item{
+    max-width: 445px;
+    color: white;
+}
+.slider-item__column{
+    display: flex;
+    margin-bottom: 27px;
+    justify-content: center;
+
+     &:last-child{
+         margin-bottom: 0;
+     }
+}
+.slider-item__text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    opacity: 0.5;
+    margin-left: 20px;
+    line-height: 30px;
+    max-width: 345px;
+}
+.slider-list{
+    display: flex;
+}
+.slider-item__ava{
+    border-radius: 50%;
+    overflow: hidden;
+    width: 75px;
+    height: 73px;
+    margin-right: 28px;
+}
+.autor{
+    max-height: initial;
+}
+.slider-item__name{
+    font-size: 18px;
+    font-weight: 700;
+}
+.slider-item__rang{
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.3;
+}
+.slider-item__data{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.form__row{
+    display: flex;
+}
+.form__input{
+    margin-right: 50px;
+    background: transparent;
+    border: transparent;
+    height: 58px;
+    width: 408px;
+    border-bottom: 2px white solid;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+.form__text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    opacity: 0.3;
+}
+.send-btn{
+    width: 347px;
+    height: 80px;
+    background-image: linear-gradient(to right, #d0731b 0%, #dc9322 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+}
