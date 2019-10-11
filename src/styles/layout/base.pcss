@@ -59,6 +59,10 @@ body {
     flex-direction: column;
     justify-content: center;
   }
+  &--form{
+    flex-direction: column;
+    height: initial;
+  }
   @include phones {
     width: 85%;
   }
@@ -83,8 +87,18 @@ body {
   }
   &-me{
     height: 100vh;
+     position: relative;
+  }
+  &-united{
+    height: 200vh;
     background-image: url('../images/content/me-bck.png');
-     background-size: cover;
+    background-size: cover;
+  }
+  &-form{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 

@@ -147,48 +147,77 @@ html(lang="en")
                 .portfolio-info__headline Сайт школы образования
                 .portfolio-info__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
                 .portfolio-info__link Посмотреть сайт
-      .section-me
-        .container.container--me
-          .slider
-            .slider-control
-              .slider-headline Что обо мне говорят
-              .slider-btns
-                button.slider-btn.slider-btn--left
-                button.slider-btn
-            ul.slider-list
-              li.slider-item
-                .slider-item__column
-                  .slider-item__icon
-                  .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .slider-item__column
-                  .slider-item__ava
-                    +image('content/autor1.png','autor')
-                  .slider-item__data
-                    .slider-item__name Ковальчук Дмитрий
-                    .slider-item__rang Основатель Loftschool
-              li.slider-item
-                .slider-item__column
-                  .slider-item__icon
-                  .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .slider-item__column
-                  .slider-item__ava
-                    +image('content/autor2.png','autor')
-                  .slider-item__data
-                    .slider-item__name Владимир Сабанцев
-                    .slider-item__rang Преподаватель
-          form.form
-            .form__row
-              label.form__label
-                .form__text Введите ваше имя
-                input(type='text',name='name').form__input
-              label.form__label
-                .form__text Введите ваш email
-                input(type='text',name='name').form__input
-            .form__row
-              label.form__label
-                .form__text Сообщение к письму
-                input(type="text").form__input
-            button.send-btn Отправить
+      .section-united
+       .section-me
+         .decorate-fall
+           +image('content/fallen-list.png','list-top')
+           +image('content/fallen-list2.png','list-bottom')
+         .container.container--me
+           .slider
+             .slider-control
+               .slider-headline Что обо мне говорят
+               .slider-btns
+                 button.slider-btn.slider-btn--left
+                 button.slider-btn
+             ul.slider-list
+               li.slider-item
+                 .slider-item__column
+                   .slider-item__icon
+                   .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                 .slider-item__column
+                   .slider-item__ava
+                     +image('content/autor1.png','autor')
+                   .slider-item__data
+                     .slider-item__name Ковальчук Дмитрий
+                     .slider-item__rang Основатель Loftschool
+               li.slider-item
+                 .slider-item__column
+                   .slider-item__icon
+                   .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                 .slider-item__column
+                   .slider-item__ava
+                     +image('content/autor2.png','autor')
+                   .slider-item__data
+                     .slider-item__name Владимир Сабанцев
+                     .slider-item__rang Преподаватель
+       .section-form
+        .container.container--form
+           .headliner Связаться со мной
+           form.form
+             .form__row
+               label.form__label
+                 .form__text Введите ваше имя
+                 input(type='text',name='name').form__input
+                 .form__label-icon
+                   +icon('user','','white','30px','26px')
+               label.form__label
+                 .form__text Введите ваш email
+                 input(type='text',name='name').form__input
+                 .form__label-icon
+                   +icon('envelope','','white','30px','29px')
+             .form__row
+               label.form__label
+                 .form__text Сообщение к письму
+                 textarea(type="text").form__textarea
+                 .form__label-icon.form__label-icon--textarea
+                   +icon('message','','white','30px','29px')
+             button.send-btn Отправить
+        footer.footer
+          .container.container--footer
+            ul.header-list
+             li.header-item
+              a(href='#') Главная
+             li.header-item
+              a(href='#') Обо мне
+             li.header-item 
+              a(href='#') Навыки
+             li.header-item
+              a(href='#') Работы
+             li.header-item
+              a(href='#') Отзывы
+             li.header-item
+              a(href='#') Связаться
+            
      // .maincontent
      //   +image('content/user.jpg', 'user-pic')
      //  +icon('link', 'link-class')
