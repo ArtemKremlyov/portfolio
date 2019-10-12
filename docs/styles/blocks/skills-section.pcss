@@ -1,0 +1,116 @@
+.section-skills__how{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 55px;
+}
+.section-skills__info{
+    width: 590px;
+    margin-bottom: 92px;
+}
+.section-skills__school{
+    opacity: 0.5;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.section-skills__skills{
+    margin-left: 100px;
+    margin-right: 40px;
+}
+.section-skills__headline{
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+.hands{
+    width: 80%;
+    transform: translateY(135px);
+}
+.section-skills__list{
+    display: flex;
+    margin-bottom: 55px;
+}
+.section-skills__item{
+    margin-right: 45px;
+    position: relative;
+
+    &:last-child{
+        margin-right: 0;
+    }
+}
+.percentage{
+    display: inline;
+    width: 157px;
+    height: 157px;
+    transform: rotate(-180deg);
+}
+.circle{
+    fill: transparent;
+    stroke-width: 6px;
+    stroke:#ccc ;
+}
+.circle-above{
+    stroke:#d0731b;
+    stroke-dasharray:251;
+    stroke-dashoffset: 0;
+}
+.circle-under{
+    stroke-width:2px ;
+}
+.skill-name{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    opacity: 0.5;
+}
+.btn-left__icon,.btn-right__icon{
+    background: svg-load('short-arrow.svg', fill=white, width=100%, height=100%) no-repeat;
+    width: 8px;
+    height: 10px;
+}
+.btn-right,.btn-left{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 50px;
+   height: 50px;
+   background-color: #353e4e;
+}
+.btn-right{
+    transform: rotate(-180deg);
+}
+.headline{
+    font-size: 36px;
+    font-weight: 700;
+    color: #333c49;
+}
+.portfolio-preview__list{
+    display: flex;
+}
+.portfolio-preview{
+    position: absolute;
+    bottom: 65px;
+    right: -50px;
+    display: flex;
+}
+.portfolio-content{
+    display: flex;
+}
+.portoflio-review__img{
+    position: relative;
+}
+.portfolio-preview__item{
+    .active{
+      border: 2px #dc9322 solid;  
+    }
+}
+.portfolio-info__number{
+    color: #e6e6e6;
+    font-size: 400px;
+    font-weight: 400;
+}

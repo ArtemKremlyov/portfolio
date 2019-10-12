@@ -1,0 +1,37 @@
+section.section.contacts
+        .container.container--form
+           .headliner Связаться со мной
+           form.form
+             .form__row
+               label.form__label
+                 .form__text Введите ваше имя
+                 input(type='text',name='name').form__input
+                 .form__label-icon
+                   +icon('user','','white','30px','26px')
+               label.form__label
+                 .form__text Введите ваш email
+                 input(type='text',name='name').form__input
+                 .form__label-icon
+                   +icon('envelope','','white','30px','29px')
+             .form__row
+               label.form__label
+                 .form__text Сообщение к письму
+                 textarea(type="text").form__textarea
+                 .form__label-icon.form__label-icon--textarea
+                   +icon('message','','white','30px','29px')
+             button.send-btn Отправить
+        footer.footer
+            .container.container--footer
+              ul.navbar-list
+               li.navbar-item
+                a(href='#') Главная
+               li.navbar-item
+                a(href='#') Обо мне
+               li.navbar-item 
+                a(href='#') Навыки
+               li.navbar-item
+                a(href='#') Работы
+               li.navbar-item
+                a(href='#') Отзывы
+               li.navbar-item
+                a(href='#') Связаться
