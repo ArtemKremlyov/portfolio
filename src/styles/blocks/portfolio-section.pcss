@@ -1,0 +1,43 @@
+.portfolio__headline{
+    font-size: 36px;
+    font-weight: 700;
+    color: #333c49;
+}
+.portfolio__left{
+    position: relative;
+}
+.portfolio__previews{
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+}
+.previews{
+    display: flex;
+}
+.previews__item{
+    &--active{
+        .previews__img{
+            border: 4px solid #dc9322;
+        }
+    }
+}
+.gallery__btns{
+    bottom: 107px;
+    position: absolute;
+    right: -50px;
+}
+.gallery-btns__item{
+    width: 50px;
+    height: 50px;
+    background-color: #353e4e;
+
+     &--prev{
+         .gallery-btns__icon{
+             transform: rotate(-180deg);
+         }
+     }
+}
+.gallery-btns{
+    display: flex;
+    flex-direction: column;
+}
