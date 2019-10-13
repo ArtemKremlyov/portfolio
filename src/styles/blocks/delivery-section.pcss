@@ -12,7 +12,7 @@
 }
 .slider__btns{
     display: flex;
-    margin-left: 75px;
+    margin-left: 123px;
 }
 .circle-btns{
     display: flex;
@@ -107,6 +107,7 @@
     position: relative;
     flex: 1;
     margin-right: 50px;
+
 }
     .form__textarea{
         height: 82px;
@@ -123,6 +124,14 @@
     font-weight: 700;
     color: white;
     padding-left: 45px;
+    outline: none;
+
+    &:focus{
+        border-bottom:4px #dc9322 solid;
+            .form__label-icon{
+                opacity: 1;
+            }
+    }
 }
 .form__input{
     margin-bottom: 45px;

@@ -3,20 +3,7 @@ header.header.header__hi
               .logo ka
 
             .hi__menu
-              nav.navbar
-               ul.navbar__list
-                li.navbar__item
-                  a(href='#').navbar__link Главная
-                li.navbar__item
-                  a(href='#').navbar__link Обо мне
-                li.navbar__item
-                  a(href='#').navbar__link Навыки
-                li.navbar__item
-                  a(href='#').navbar__link Работы
-                li.navbar__item
-                  a(href='#').navbar__link Отзывы
-                li.navbar__item
-                  a(href='#').navbar__link Связаться
+               +nav('header',['Главная','Обо мне','Навыки','Работы','Отзывы','Связаться'])
 
             .hi__links
               ul.social-list

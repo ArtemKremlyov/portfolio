@@ -12,10 +12,11 @@
 .portfolio__right{
     max-width: 340px;
     margin-left: 160px;
+    position: relative;
 }
 .portfolio__previews{
     position: absolute;
-    bottom: 100px;
+    bottom: 60px;
     right: 0;
 }
 .portfolio__tags{
@@ -25,8 +26,7 @@
     color: #353e4f;
     font-size: 30px;
     font-weight: 700;
-    line-height: 48px;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 .portfolio__info-learn{
     font-size: 16px;
@@ -51,7 +51,7 @@
     }
 }
 .gallery__btns{
-    bottom: 107px;
+    bottom: 67px;
     position: absolute;
     right: -50px;
 }
@@ -115,4 +115,13 @@
     width: 15px;
     height: 15px;
     background: svg-load('link.svg', fill=#586ed3, width=15px, height=15px) no-repeat center center;
+}
+.portfolio__number{
+    position: absolute;
+    font-size: 25rem;
+    font-weight: 800;
+    color: #e6e6e6;
+    left: -223px;
+    bottom: -97px;
+    z-index: -1;
 }

@@ -7,18 +7,18 @@ section.section.contacts
                  .form__text Введите ваше имя
                  input(type='text',name='name').form__input
                  .form__label-icon
-                   +icon('user','','white','30px','26px')
+                   +icon('user','form__input-icon','white','30px','26px')
                label.form__label
                  .form__text Введите ваш email
                  input(type='text',name='name').form__input
                  .form__label-icon
-                   +icon('envelope','','white','30px','29px')
+                   +icon('envelope','form__input-icon','white','30px','29px')
              .form__row
                label.form__label
                  .form__text Сообщение к письму
                  textarea(type="text").form__textarea
                  .form__label-icon.form__label-icon--textarea
-                   +icon('message','','white','30px','29px')
+                   +icon('message','form__input-icon','white','30px','29px')
              button.send-btn Отправить
         footer.footer
             .container.container--footer
@@ -30,20 +30,7 @@ section.section.contacts
                     .copyright__info-desc Личный сайт вэб разработчика
               .footer__info 
                .footer__menu
-                 nav.navbar
-                  ul.navbar__list
-                    li.navbar__item
-                    a(href='#').navbar__link Главная
-                    li.navbar__item
-                    a(href='#').navbar__link Обо мне
-                    li.navbar__item
-                    a(href='#').navbar__link Навыки
-                    li.navbar__item
-                    a(href='#').navbar__link Работы
-                    li.navbar__item
-                    a(href='#').navbar__link Отзывы
-                    li.navbar__item
-                    a(href='#').navbar__link Связаться 
+                  +nav('footer',['Главная','Обо мне','Навыки','Работы','Отзывы','Связаться'])
                .footer__columns
                 .footer__columns-col
                   .footer__text Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
