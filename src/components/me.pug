@@ -1,21 +1,22 @@
-section.section.me
+section.section.reviews
          .decorate-fall
            +image('content/fallen-list.png','list-top')
            +image('content/fallen-list2.png','list-bottom')
          .container.container--me
            .slider
-             .slider-control
-               .slider-headline Что обо мне говорят
-               .slider-btns
-                 button.slider-btn.slider-btn--left
-                 button.slider-btn
+             .slider__control
+                 .slider__headline Что обо мне говорят
+                 .slider__btns
+                  .circle-btns
+                    button.circle-btns__item.circle-btns__item--left
+                    button.circle-btns__item
              ul.slider-list
                li.slider-item
                  .slider-item__column
                    .slider-item__icon
                    .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                  .slider-item__column
-                   .slider-item__ava
+                   .ava.slider__ava
                      +image('content/autor2.png','autor')
                    .slider-item__data
                      .slider-item__name Ковальчук Дмитрий
@@ -25,7 +26,7 @@ section.section.me
                    .slider-item__icon
                    .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
                  .slider-item__column
-                   .slider-item__ava
+                   .ava.slider__ava
                      +image('content/autor1.png','autor')
                    .slider-item__data
                      .slider-item__name Владимир Сабанцев

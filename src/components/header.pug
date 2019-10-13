@@ -6,23 +6,26 @@ header.header.header__hi
               nav.navbar
                ul.navbar__list
                 li.navbar__item
-                  a(href='#') Главная
+                  a(href='#').navbar__link Главная
                 li.navbar__item
-                  a(href='#') Обо мне
+                  a(href='#').navbar__link Обо мне
                 li.navbar__item
-                  a(href='#') Навыки
+                  a(href='#').navbar__link Навыки
                 li.navbar__item
-                  a(href='#') Работы
+                  a(href='#').navbar__link Работы
                 li.navbar__item
-                  a(href='#') Отзывы
+                  a(href='#').navbar__link Отзывы
                 li.navbar__item
-                  a(href='#') Связаться
+                  a(href='#').navbar__link Связаться
 
             .hi__links
               ul.social-list
                li.social-item
-                 +icon('insta', 'social-icon', 'white', '25px', '25px')
+                a(href="#").social-item__link
+                  +icon('insta', 'social-icon', 'white', '25px', '25px')
                li.social-item
-                 +icon('vk', 'social-icon', 'white', '31px', '31px')
+                a(href="https://vk.com/akpemlyov").social-item__link
+                  +icon('vk', 'social-icon', 'white', '31px', '31px')
                li.social-item
+                a(href="https://github.com/ArtemKremlyov/").social-item__link
                  +icon('github', 'social-icon','white', '23px', '27px')

@@ -1,6 +1,6 @@
 section.section.contacts
         .container.container--form
-           .headliner Связаться со мной
+           .contacts__headline Связаться со мной
            form.form
              .form__row
                label.form__label
@@ -22,16 +22,42 @@ section.section.contacts
              button.send-btn Отправить
         footer.footer
             .container.container--footer
-              ul.navbar-list
-               li.navbar-item
-                a(href='#') Главная
-               li.navbar-item
-                a(href='#') Обо мне
-               li.navbar-item 
-                a(href='#') Навыки
-               li.navbar-item
-                a(href='#') Работы
-               li.navbar-item
-                a(href='#') Отзывы
-               li.navbar-item
-                a(href='#') Связаться
+              .footer__copyright
+                .copyright
+                  .copyright__yeahr © 2019
+                  .copyright__info
+                    .copyright__info-name Артем Кремлев
+                    .copyright__info-desc Личный сайт вэб разработчика
+              .footer__info 
+               .footer__menu
+                 nav.navbar
+                  ul.navbar__list
+                    li.navbar__item
+                    a(href='#').navbar__link Главная
+                    li.navbar__item
+                    a(href='#').navbar__link Обо мне
+                    li.navbar__item
+                    a(href='#').navbar__link Навыки
+                    li.navbar__item
+                    a(href='#').navbar__link Работы
+                    li.navbar__item
+                    a(href='#').navbar__link Отзывы
+                    li.navbar__item
+                    a(href='#').navbar__link Связаться 
+               .footer__columns
+                .footer__columns-col
+                  .footer__text Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
+                  .footer__social
+                     ul.social-list
+                       li.social-item
+                        a(href="#").social-item__link
+                          +icon('insta', 'social-icon', 'white', '20px', '20px')
+                       li.social-item
+                        a(href="https://vk.com/akpemlyov").social-item__link
+                          +icon('vk', 'social-icon', 'white', '25px', '25px')
+                       li.social-item
+                        a(href="https://github.com/ArtemKremlyov/").social-item__link
+                          +icon('github', 'social-icon','white', '20px', '20px')
+                .footer__columns-col
+                  .footer__text Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете
+                  .footer__autor Martin Golding

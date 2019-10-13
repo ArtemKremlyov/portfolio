@@ -2,24 +2,25 @@ section.section.portfolio
         .container.container--portfolio
             .portfolio__left
                 p2.portfolio__headline Мои работы
-                .gallery
-                  +image('content/big-prev.png','gallery__bigpict')
-                  .portfolio__previews
-                    ul.previews
-                      li.previews__item.previews__item--active
-                        +image('content/mini-prev1.png','previews__img')
-                      li.previews__item
-                        +image('content/mini-prev1.png','previews__img')
-                      li.previews__item
-                        +image('content/mini-prev1.png','previews__img')
-                      li.previews__item
-                        +image('content/mini-prev1.png','previews__img')
-                  .gallery__btns
-                    .gallery-btns
-                      button.gallery-btns__item
-                        +icon('short-arrow','gallery-btns__icon','white','10px','8px')
-                      button.gallery-btns__item.gallery-btns__item--prev
-                        +icon('short-arrow','gallery-btns__icon','white','10px','8px')
+                 .portfolio__gallery
+                  .gallery
+                    +image('content/big-prev.png','gallery__bigpict')
+                    .portfolio__previews
+                      ul.previews
+                        li.previews__item.previews__item--active
+                          +image('content/mini-prev1.png','previews__img')
+                        li.previews__item
+                          +image('content/mini-prev1.png','previews__img')
+                        li.previews__item
+                          +image('content/mini-prev1.png','previews__img')
+                        li.previews__item
+                          +image('content/mini-prev1.png','previews__img')
+                    .gallery__btns
+                      .gallery-btns
+                        button.gallery-btns__item
+                          +icon('short-arrow','gallery-btns__icon','white','10px','8px')
+                        button.gallery-btns__item.gallery-btns__item--prev
+                          +icon('short-arrow','gallery-btns__icon','white','10px','8px')
             .portfolio__right
               .portfolio__tags
                 ul.tags
@@ -28,7 +29,7 @@ section.section.portfolio
                   li.tags__item Javascript
               .portfolio__info
                 .portfolio__info-headline Сайт школы образования
-                .potfolio__info-learn Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+                .portfolio__info-learn Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
                 a(href='#').iconned-link
                   .iconned-link__icon 
                   .iconned-link__text Посмотреть сайт                 

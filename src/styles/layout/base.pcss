@@ -54,16 +54,27 @@ body {
      flex-direction: row;
    }
    &--portfolio{
-     flex-direction: column;
+     flex-direction: row;
      justify-content: center;
    }
-   &--me{
+   &--reviews{
     flex-direction: column;
     justify-content: center;
   }
   &--form{
     flex-direction: column;
     height: initial;
+    padding-bottom: 160px;
+    align-items: flex-start;
+  }
+  &--footer{
+    padding: 80px 0;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+  &--me{
+    align-items: flex-start;
   }
   @include phones {
     width: 85%;
@@ -96,18 +107,17 @@ body {
     align-items: center;
     background-image:url('../images/content/skills-bck.png');
   }
-
-   .portfolio{
-    height: 100vh;
+  .portfolio{
+    padding-top: 200px;
+    padding-bottom: 205px;
   }
 
-   .me{
-    height: 100vh;
+   .reviews{
      position: relative;
+     padding-top: 130px;
   }
 
   .contacts{
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
