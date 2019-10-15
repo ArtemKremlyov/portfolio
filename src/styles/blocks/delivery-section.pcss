@@ -25,6 +25,11 @@
     border: 2px white solid;
     background: svg-load('short-arrow.svg', fill=white, width=8px, height=10px) no-repeat center center;
 
+    &:hover{
+        border: 3px orange solid;
+        background: svg-load('short-arrow.svg', fill=orange, width=11px, height=14px) no-repeat center center;
+    }
+
      &--left{
          transform: rotate(-180deg);
          margin-right: 20px;
@@ -125,6 +130,10 @@
     color: white;
     padding-left: 45px;
     outline: none;
+
+    &:hover{
+        border-color: orange;
+    }
 
     &:focus{
         border-bottom:4px #dc9322 solid;

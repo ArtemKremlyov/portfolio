@@ -5,6 +5,11 @@
 }
 .portfolio__gallery{
     margin-top: 95px;
+
+    @include desktop{
+        max-width: 675px;
+        margin-top: 59px;
+    }
 }
 .portfolio__left{
     position: relative;
@@ -38,6 +43,11 @@
 }
 .previews{
     display: flex;
+
+    @include desktop{
+    max-width: 545px;
+    overflow: hidden;
+    }
 }
 .previews__item{
     transition: 0.4s;
@@ -47,6 +57,7 @@
     &--active{
         .previews__img{
             border: 4px solid #dc9322;
+            width: 100%;
         }
     }
 }
@@ -78,6 +89,9 @@
 .gallery-btns{
     display: flex;
     flex-direction: column;
+}
+.previews__img{
+    max-width: initial;
 }
 .tags__item{
     background-color: #859ec2;
