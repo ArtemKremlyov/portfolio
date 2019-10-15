@@ -113,6 +113,17 @@
     flex: 1;
     margin-right: 50px;
 
+    &:hover{
+        .form__input-icon{
+            fill:#dc9322 ;
+            opacity: 1;
+        }
+        .form__label-icon{
+            opacity: 1;
+        }
+    }
+    
+
 }
     .form__textarea{
         height: 82px;
@@ -132,15 +143,24 @@
     outline: none;
 
     &:hover{
-        border-color: orange;
+        border-bottom:2px #dc9322 solid;
     }
 
     &:focus{
-        border-bottom:4px #dc9322 solid;
+        border-bottom:2px #dc9322 solid;
             .form__label-icon{
                 opacity: 1;
             }
     }
+}
+.form__input+.form__label-icon{
+        &:focus{
+            .form__input-icon{
+                fill:#dc9322 ;
+            }
+            opacity: 1;
+        }
+    
 }
 .form__input{
     margin-bottom: 45px;
