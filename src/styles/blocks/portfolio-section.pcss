@@ -21,8 +21,8 @@
 }
 .portfolio__previews{
     position: absolute;
-    bottom: 60px;
-    right: 1px;
+    bottom: 65px;
+    right: 0px;
 }
 .portfolio__tags{
     margin-bottom: 45px;
@@ -45,7 +45,6 @@
     display: flex;
 
     @include desktop{
-    max-width: 545px;
     overflow: hidden;
     }
 }
@@ -64,10 +63,8 @@
         }
       }
     &--active{
-        .previews__img{
-            border: 4px solid #dc9322;
-            width: 100%;
-        }
+       outline: #ff9a00 3px solid;
+       margin-right: 3px;
     }
 }
 .gallery__btns{
@@ -100,8 +97,8 @@
     flex-direction: column;
 }
 .previews__img{
-    max-width: initial;
     height: 100%;
+    width: 100%;
 
 }
 .tags__item{
