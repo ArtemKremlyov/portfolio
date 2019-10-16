@@ -3,11 +3,22 @@ footer{
 }
 .footer__columns{
     display: flex;
+
+    @include tablets{
+        flex-direction: column;
+    }
 }
 .footer__info{
     display: flex;
     flex-direction: column;
     margin-left: 152px;
+
+    @include desktop{
+        margin-left: 100px;
+    }
+    @include phones{
+        margin: 0;
+    }
 }
 .footer__columns-col{
     display: flex;
@@ -16,6 +27,15 @@ footer{
 
      &:last-child{
          margin-right: 0;
+
+         @include tablets{
+             margin-bottom: 0;
+         }
+     }
+
+     @include desktop{
+         margin-right: 28px;
+         margin-bottom: 55px;
      }
 }
 .footer__text{
@@ -31,28 +51,59 @@ footer{
 }
 .footer__menu{
     margin-bottom: 68px;
+
+    @include tablets{
+        margin-bottom: 50px;
+    }
+    @include phones{
+        margin-bottom: 33px;
+    }
 }
 .copyright{
     display: flex;
+
+    @include desktop{
+        flex-direction: column;
+    }
 }
 .copyright__yeahr{
     font-size: 48px;
     font-weight: 400;
     opacity: 0.1;
     min-width: 172px;
+
+    @include desktop{
+        margin-bottom: 15px;
+    }
 }
 .copyright__info{
     max-width: 150px;
     margin-left: 60px;
+
+    @include desktop{
+        max-width: none;
+        margin-left: 0;
+    }
 }
 .copyright__info-name{
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
+
+    @include desktop{
+        margin-bottom: 20px;
+    }
+    @include phones{
+        margin-bottom: 8px;
+    }
 }
 .copyright__info-desc{
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
     opacity: 0.15;
+
+    @include phones{
+        margin-bottom: 40px;
+    }
 }

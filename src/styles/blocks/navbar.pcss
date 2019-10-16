@@ -16,6 +16,9 @@
             border-bottom: #ff9a00 3px solid;
         }       
      }
+     @include tablets{
+         margin-bottom: 13px;
+     }
 
      
 }
@@ -23,4 +26,16 @@
     padding-bottom: 15px; 
     padding-left: 10px;
     padding-right: 10px;
+}
+.hi__menu{
+ @include tablets{
+    display: none
+ }
+}
+.navbar{
+    &--footer{
+        .navbar__list{
+            flex-wrap: wrap;
+        }
+    }
 }
