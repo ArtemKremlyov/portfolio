@@ -9,31 +9,33 @@ section.section.skills
         #skills-component
 
 
-
-
-
 script(type="text/x-template")#skills-list
   .skill
     ul.skill__rows
      li.skill__row(v-for='skill in skills' :key="skill.skillsGroup")
-      skills-row()
+      skills-row(
+        :skill='skill'
+      )
 
 
 script(type="text/x-template")#skills-row
- .skill__headline Frontend
+       .skill-row
+        .skill__headline {{skill.skillsGroup}}
         ul.skill__list
-          -for(j=0;j<4;j++)
-            li.skill__item
-             skill
+          li.skill__item(v-for='(skillPercent,skillName) in skill.skills')
+            skill(
+              :skill-name="skillName"
+              :skill-percent="skillPercent"
+            )
  
 
 script(type="text/x-template")#skill
  .skill-component
-    .skill__name HTML
+    .skill__name {{skillName}}
     svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
       defs.defs
         linearGradient#linear-gradient
           stop(offset='0%' stop-color='#d0731b')
           stop(offset='100%' stop-color='#dc9322 ')
       circle.circle.circle-under(cx='50' cy='50' r='40')
-      circle.circle.circle-above(cx='50' cy='50' r='40' stroke="url(#linear-gradient)" style='stroke-dashoffset: 105')                   
+      circle.circle.circle-above(cx='50' cy='50' r='40' stroke="url(#linear-gradient)" ref="color-circle")                   
