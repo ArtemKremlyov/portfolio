@@ -17,4 +17,66 @@
     position: fixed;
     top: 63px;
     right: 21px;
+ 
+    @include desktopHd{
+        display: none;
+    }
+
+    @include tablets{
+        display: block;
+    }
+}
+
+
+
+
+.aside{
+    height:100vh;
+    width: 326px;
+    background-color: #ffffff;
+    position: relative;
+
+    @include phones{
+        width: 100%;
+    }
+}
+.aside__list{
+    margin-bottom: 20px;
+}
+.overlay{
+    position:fixed;
+    top: 0;
+    right: 0;
+
+    @include phones{
+        width: 100%;
+    }
+}
+.aside__content{
+    padding-left:67px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.aside__list-item{
+    color: #414c63;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.aside__social{
+    .social-list{
+        .social-item{
+            opacity: 1;
+        }
+    }
+}
+.aside__cross{
+    position: fixed;
+    right: 45px;
+    top:65px;
+}
+.cross{
+    background: transparent;
 }

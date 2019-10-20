@@ -8,9 +8,10 @@ section.section.reviews
                  .slider__headline Что обо мне говорят
                  .slider__btns
                   .circle-btns
-                    button.circle-btns__item.circle-btns__item--left
-                    button.circle-btns__item
-             ul.slider-list
+                    button.circle-btns__item.circle-btns__item--left(@click="previous")
+                    button.circle-btns__item(@click="next")
+             flickity(ref="flickity" :options="flickityOptions").slider-list
+              -for(k=0;k<5;k++)
                li.slider-item
                  .slider-item__column
                    .slider-item__icon
@@ -21,13 +22,4 @@ section.section.reviews
                    .slider-item__data
                      .slider-item__name Ковальчук Дмитрий
                      .slider-item__rang Основатель Loftschool
-               li.slider-item
-                 .slider-item__column
-                   .slider-item__icon
-                   .slider-item__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                 .slider-item__column
-                   .ava.slider__ava
-                     +image('content/autor1.png','autor')
-                   .slider-item__data
-                     .slider-item__name Владимир Сабанцев
-                     .slider-item__rang Преподаватель
+              

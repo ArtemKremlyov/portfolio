@@ -6,52 +6,34 @@ section.section.skills
          .skills__info
           .skills__how Чем я могу быть полезен вам
           .skills__school Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-         .skill
-          .skill__headline Frontend
-          ul.skill__list
-           li.skill__item
-            .skill__name HTML
-            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-              defs.defs
-                linearGradient#linear-gradient
-                  stop(offset='0%' stop-color='#d0731b')
-                  stop(offset='100%' stop-color='#dc9322 ')
-              circle.circle.circle-under(cx='50' cy='50' r='40')
-              circle.circle.circle-above(cx='50' cy='50' r='40' stroke="url(#linear-gradient)" style='stroke-dashoffset: 105')
-           li.skill__item
-            .skill__name CSS
-            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-              circle.circle.circle-under(cx='50' cy='50' r='40')
-              circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 145')
-           li.skill__item
-            .skill__name Javascript
-            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-              circle.circle.circle-under(cx='50' cy='50' r='40')
-              circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 207')
-           li.skill__item
-            .skill__name jQuery и Vue
-            svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-              circle.circle.circle-under(cx='50' cy='50' r='40')
-              circle.circle.circle-above(cx='50' cy='50' r='40'  style='stroke-dashoffset: 187')
-          .skill__headline Workflow
-          ul.skill__list
+        #skills-component
+
+
+
+
+
+script(type="text/x-template")#skills-list
+  .skill
+    ul.skill__rows
+     li.skill__row(v-for='skill in skills' :key="skill.skillsGroup")
+      skills-row()
+
+
+script(type="text/x-template")#skills-row
+ .skill__headline Frontend
+        ul.skill__list
+          -for(j=0;j<4;j++)
             li.skill__item
-             .skill__name Git
-             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-               circle.circle.circle-under(cx='50' cy='50' r='40')
-               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 105')
-            li.skill__item
-             .skill__name Terminal
-             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-               circle.circle.circle-under(cx='50' cy='50' r='40')
-               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 145')
-            li.skill__item
-             .skill__name Gulp
-             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-               circle.circle.circle-under(cx='50' cy='50' r='40')
-               circle.circle.circle-above(cx='50' cy='50' r='40' style='stroke-dashoffset: 207')
-            li.skill__item
-             .skill__name Webpack
-             svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
-               circle.circle.circle-under(cx='50' cy='50' r='40')
-               circle.circle.circle-above(cx='50' cy='50' r='40'  style='stroke-dashoffset: 187')
+             skill
+ 
+
+script(type="text/x-template")#skill
+ .skill-component
+    .skill__name HTML
+    svg.percentage(viewBox='0 0 100 100' preserveAspectRatio='none')
+      defs.defs
+        linearGradient#linear-gradient
+          stop(offset='0%' stop-color='#d0731b')
+          stop(offset='100%' stop-color='#dc9322 ')
+      circle.circle.circle-under(cx='50' cy='50' r='40')
+      circle.circle.circle-above(cx='50' cy='50' r='40' stroke="url(#linear-gradient)" style='stroke-dashoffset: 105')                   

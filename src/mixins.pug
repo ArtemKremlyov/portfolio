@@ -7,6 +7,9 @@ mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
 
 
+mixin layers(path,className)
+  img(src=require(`images/content/layers/${path}`) class=className)
+
 mixin nav(mod, data)
  nav(class='navbar navbar--' + mod)
    ul.navbar__list

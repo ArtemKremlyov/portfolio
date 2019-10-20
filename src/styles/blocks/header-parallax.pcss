@@ -1,0 +1,41 @@
+.parallax-header{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+
+     &__item{
+         min-width: 100%;
+         min-height: 100%;
+         background-position: 50% 0;
+         background-size: cover;
+         position: absolute;
+         left: 0;
+         top: 0;
+         transform: translateX(0) translateZ(0);
+
+         &--1{
+             background-image: url('../images/content/layers/bg1.png');
+             z-index: 5;
+         }
+         &--2{
+            background-image: url('../images/content/layers/bg2.png');
+            z-index: 4;
+        }
+        &--3{
+            background-image: url('../images/content/layers/bg3.png');
+            z-index: 3;
+        }
+        &--4{
+            background-image: url('../images/content/layers/bg4.png');
+            z-index: 2;
+        }
+        &--5{
+            background-image: url('../images/content/layers/bg5.png');
+            z-index: 1;
+        }
+     }
+}
