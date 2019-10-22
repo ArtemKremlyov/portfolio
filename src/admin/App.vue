@@ -1,3 +1,9 @@
 <template lang="pug">
-  h1 Welcome to the Vue App
+   .admin-about
+       .container.container--admin-about
+        .header.header__admin-about
+
 </template>
+<style lang="postcss">
+
+</style>
