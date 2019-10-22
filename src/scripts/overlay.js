@@ -9,18 +9,14 @@ btn.addEventListener('click',function(e){
 })
 
 function createModal(){
-    let overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    const overlayTemplate = document.querySelector('#overlayTemplate');
-    overlay.innerHTML = overlayTemplate.innerHTML;
+    const overlay = document.querySelector('.wrapper__aside');
 
-    body.appendChild(overlay);
+    overlay.style.right = "0";
 
     let cross = document.querySelector('.cross');
     cross.addEventListener('click',function(e){
         e.preventDefault;
-        overlay.style.display = 'none';
-        overlay.remove('overlay');
+        overlay.style.right = '-1000px';
     })
 
     return;

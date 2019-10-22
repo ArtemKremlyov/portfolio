@@ -21,8 +21,10 @@ html(lang="en")
       include components/portfolio.pug
  
       .section-united.end
-       .parralax-bg
-         +image('content/me-bck.png','layer-img-1')
+       .decorate-fall
+           +image('content/fallen-list.png','list-top')
+           +image('content/fallen-list2.png','list-bottom')
+       include components/footer-parallax.pug
        include components/me.pug
        include components/contacts.pug
           
@@ -31,36 +33,37 @@ html(lang="en")
         .fullscr-btn__elem
         .fullscr-btn__elem
         .fullscr-btn__elem
-     script(type='template')#overlayTemplate
+         
+     .wrapper__aside
         .aside
-          .aside__cross
-            button.cross
-              +icon('remove','cross__icon','#414c63','20px','20px')
-          .aside__content
-            ul.aside__list
-              li.aside__list-item
-                a(href='#').aside__list-link Главная
-              li.aside__list-item
-                a(href='#').aside__list-link Обо мне
-              li.aside__list-item
-                a(href='#').aside__list-link Навыки
-              li.aside__list-item
-                a(href='#').aside__list-link Работы
-              li.aside__list-item
-                a(href='#').aside__list-link Отзывы
-              li.aside__list-item
-                a(href='#').aside__list-link Связаться
-            .aside__social
-              ul.social-list
-                li.social-item
-                  a(href="#").social-item__link
-                    +icon('insta', 'social-icon', '#414c63', '25px', '25px')
-                li.social-item
-                  a(href="https://vk.com/akpemlyov").social-item__link
-                    +icon('vk', 'social-icon', '#414c63', '31px', '31px')
-                li.social-item
-                  a(href="https://github.com/ArtemKremlyov/").social-item__link
-                    +icon('github', 'social-icon','#414c63', '23px', '27px')
+            .aside__cross
+              button.cross
+                +icon('remove','cross__icon','#414c63','20px','20px')
+            .aside__content
+              ul.aside__list
+                li.aside__list-item
+                  a(href='#').aside__list-link Главная
+                li.aside__list-item
+                  a(href='#').aside__list-link Обо мне
+                li.aside__list-item
+                  a(href='#').aside__list-link Навыки
+                li.aside__list-item
+                  a(href='#').aside__list-link Работы
+                li.aside__list-item
+                  a(href='#').aside__list-link Отзывы
+                li.aside__list-item
+                  a(href='#').aside__list-link Связаться
+              .aside__social
+                ul.social-list
+                  li.social-item
+                    a(href="#").social-item__link
+                      +icon('insta', 'social-icon', '#414c63', '25px', '25px')
+                  li.social-item
+                    a(href="https://vk.com/akpemlyov").social-item__link
+                      +icon('vk', 'social-icon', '#414c63', '31px', '31px')
+                  li.social-item
+                    a(href="https://github.com/ArtemKremlyov/").social-item__link
+                      +icon('github', 'social-icon','#414c63', '23px', '27px')
   
      // .maincontent
      //   +image('content/user.jpg', 'user-pic')

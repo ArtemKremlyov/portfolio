@@ -58,13 +58,27 @@
 }
 
 .user__type{
-    opacity: 0.15;
+    opacity: 0.3;
 }
 .user__value{
     margin-left: auto;
 }
 .user__list{
   width: 100%;
+
+  @include phones{
+    margin-bottom: 39px;
+  }
+}
+.about__bck{
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/content/about-bg.png");
+    background-size: cover;
+    top: 62%
 }
 .about__info{
    max-width: 530px;

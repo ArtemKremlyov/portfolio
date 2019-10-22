@@ -6,6 +6,9 @@ new Vue({
   components: {
     Flickity
   },
+  props:{
+      disabled: Boolean
+  },
   
   data() {
     return {
@@ -16,8 +19,8 @@ new Vue({
         wrapAround: false,
         groupCells:true,
         freeScroll:false,
-        contain:true
-        
+        contain:true,
+
         // any options from Flickity can be used
       }
     }
@@ -37,7 +40,7 @@ new Vue({
       if  (this.$refs.flickity.selectedIndex() === 0){
           this.$el.querySelector('.circle-btns__item--left').disabled = true;
       }
-      else if (this.$refs.flickity.selectedIndex() === this.$refs.flickity.slides().lenght - 1){
+      else if (this.$refs.flickity.selectedIndex() === this.$refs.flickity.slides().length -1){
           this.$el.querySelector('.circle-btns__item--right').disabled = true;
       }
       else{

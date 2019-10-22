@@ -1,9 +1,11 @@
 var parallax = (function(){
-let ph1 = document.querySelector('.parallax-header__item--1'),
+let //ph1 = document.querySelector('.parallax-header__item--1'),
     ph2 = document.querySelector('.parallax-header__item--2'),
     ph3 = document.querySelector('.parallax-header__item--3'),
     ph4 = document.querySelector('.parallax-header__item--4'),
     ph5 = document.querySelector('.parallax-header__item--5');
+    pf1 = document.querySelector('.parallax-footer__item--1');
+
 
 return {
     move:function(block,windowScroll,strafeAmount){
@@ -16,14 +18,19 @@ return {
     },
     init: function(wScroll){
         let startOffset = getOffset('start').bottom;
+        let endOffset = getOffset('end').top;
 
         if (startOffset>0){
-       this.move(ph1,wScroll,50);
+    //   this.move(ph1,wScroll,80);
        this.move(ph2,wScroll,100);
        this.move(ph3,wScroll,150);
        this.move(ph4,wScroll,200);
        this.move(ph5,wScroll,250);
         }
+       if (endOffset<0){
+        this.move(pf1,wScroll,300);
+
+       }
     }
 }
 }());

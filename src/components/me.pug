@@ -1,17 +1,14 @@
 section.section.reviews
-         .decorate-fall
-           +image('content/fallen-list.png','list-top')
-           +image('content/fallen-list2.png','list-bottom')
          .container.container--me
            .slider
              .slider__control
                  .slider__headline Что обо мне говорят
                  .slider__btns
                   .circle-btns
-                    button.circle-btns__item.circle-btns__item--left(@click="previous" :disabled = 'true')
-                    button.circle-btns__item.circle-btns__item--right(@click="next" :disabled = 'false')
+                    button.circle-btns__item.circle-btns__item--left(@click="previous" :disabled = "true")
+                    button.circle-btns__item.circle-btns__item--right(@click="next" :disabled = "false")
              flickity(ref="flickity" :options="flickityOptions").slider-list
-              -for(k=0;k<5;k++)
+              -for(k=0;k<6;k++)
                 li.slider-item
                   .slider-item__column
                     .slider-item__icon
