@@ -2,7 +2,7 @@ section.section.portfolio
         .container.container--portfolio
             .portfolio__left
                 p2.portfolio__headline Мои работы
-                 .portfolio__gallery
+                .portfolio__gallery
                   .gallery
                     +image('content/big-prev.png','gallery__bigpict')
                     .portfolio__previews
@@ -25,9 +25,10 @@ section.section.portfolio
               .portfolio__number 2
               .portfolio__tags
                 ul.tags
-                  li.tags__item HTML
-                  li.tags__item CSS
-                  li.tags__item Javascript
+                 each item in ["html","css","js"]
+                    li.tags__item 
+                      .tag #{item}
+
               .portfolio__info
                 .portfolio__info-headline Сайт школы образования
                 .portfolio__info-learn Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
