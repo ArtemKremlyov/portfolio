@@ -23,10 +23,10 @@ return {
 
         if (startOffset>0){
     //   this.move(ph1,wScroll,80);
-       this.move(ph2,wScroll,110);
-       this.move(ph3,wScroll,230);
-       this.move(ph4,wScroll,180);
-       this.move(ph5,wScroll,150);
+       this.move(ph2,wScroll,95);
+       this.move(ph3,wScroll,590);
+       this.move(ph4,wScroll,175);
+       this.move(ph5,wScroll,140);
         }
        if (endOffset<0){
         this.move(pf1,wScroll,300);
