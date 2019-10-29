@@ -22,6 +22,9 @@
     max-width: 340px;
     margin-left: 160px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     @include tablets{
         margin-left: 0;
@@ -33,6 +36,14 @@
     }
     @include phones{
         text-align: left;
+    }
+}
+.slider-portfolio{
+    display: flex;
+
+    @include tablets{
+        flex-direction: column;
+        padding: 2.25rem;
     }
 }
 .portfolio__previews{
@@ -85,6 +96,7 @@
 .previews__item{
     transition: 0.4s;
     position: relative;
+    height: 100px;
     &:hover{
         &::after{
             content: '';

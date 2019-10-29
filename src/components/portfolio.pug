@@ -1,37 +1,74 @@
 section.section.portfolio
         .container.container--portfolio
-            .portfolio__left
-                p2.portfolio__headline Мои работы
-                .portfolio__gallery
-                  .gallery
-                    +image('content/big-prev.png','gallery__bigpict')
-                    .portfolio__previews
-                      ul.previews
-                        li.previews__item.previews__item--active
-                          +image('content/mini-prev1.png','previews__img')
-                        li.previews__item
-                          +image('content/mini-prev1.png','previews__img')
-                        li.previews__item
-                          +image('content/mini-prev1.png','previews__img')
-                        li.previews__item
-                          +image('content/mini-prev1.png','previews__img')
-                    .gallery__btns
-                      .gallery-btns
-                        button.gallery-btns__item
-                          +icon('short-arrow','gallery-btns__icon','white','10px','8px')
-                        button.gallery-btns__item.gallery-btns__item--prev
-                          +icon('short-arrow','gallery-btns__icon','white','10px','8px')
-            .portfolio__right
-              .portfolio__number 2
-              .portfolio__tags
-                ul.tags
-                 each item in ["html","css","js"]
-                    li.tags__item 
-                      .tag #{item}
+            #slider-component
 
+          
+script(type="text/x-template")#slider-container
+          .slider-portfolio
+            display(
+              :works="works"
+              :current-work="currentWork"
+              @slide="handleSlide"
+            )
+            info(
+              :current-work="currentWork"
+            )
+
+
+script(type="text/x-template")#slider-display
+  .portfolio__left
+    h2.portfolio__headline Мои работы
+    .portfolio__gallery
+      .gallery
+        img(:src="currentWork.photo").gallery__bigpict
+        thumbs(
+            :works="works"
+            :current-work="currentWork"
+        )
+        buttons(
+            @slide="$emit('slide', $event)"
+        )
+
+
+
+script(type="text/x-template")#slider-previews
+        .portfolio__previews
+          ul.previews
+            li.previews__item(
+                v-for="work in works"
+                :key="work.id"
+                :class="{active: work.id === currentWork.id}"
+                )
+              img(:src="work.photo" alt="").previews__img
+
+
+script(type="text/x-template")#slider-btns
+        .gallery__btns
+          .gallery-btns
+            button(@click.prevent="$emit('slide', 'next')").gallery-btns__item
+              +icon('short-arrow','gallery-btns__icon','white','10px','8px')
+            button(@click.prevent="$emit('slide', 'prev')").gallery-btns__item.gallery-btns__item--prev
+              +icon('short-arrow','gallery-btns__icon','white','10px','8px')      
+
+
+
+script(type="text/x-template")#slider-info
+           .portfolio__right
+              .portfolio__number {{currentWork.id}}
+              tags(
+                :tags="tagsArray"
+              )
               .portfolio__info
-                .portfolio__info-headline Сайт школы образования
-                .portfolio__info-learn Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-                a(href='#').iconned-link
+                .portfolio__info-headline {{currentWork.title}}
+                .portfolio__info-learn {{currentWork.desc}}
+                a(:href='currentWork.link').iconned-link
                   .iconned-link__icon 
-                  .iconned-link__text Посмотреть сайт                 
+                  .iconned-link__text Посмотреть сайт
+
+
+
+script(type="text/x-template")#slider-tags
+  .portfolio__tags
+    ul.tags
+      li.tags__item(v-for="tag in tags" key="tg")
+        .tag {{tag}}

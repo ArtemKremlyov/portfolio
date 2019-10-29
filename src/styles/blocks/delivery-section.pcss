@@ -184,7 +184,11 @@
             opacity: 1;
         }
     }
-    
+    &.error{
+        .form__tooltip{
+            display: block;
+        }
+    }
 
 }
     .form__textarea{
@@ -228,6 +232,12 @@
     margin-bottom: 45px;
     height: 58px;
     width: 100%;
+
+    &:focus{
+        .contacts__tooltip {
+            display: block;
+        }
+    }
 }
 .form__text{
     font-size: 16px;
@@ -309,4 +319,63 @@
              }
         }
     }
+}
+.form__tooltip{
+    display: none;
+    position: absolute;
+    background: #b13333;
+    font-size: .875rem;
+    font-weight: 400;
+    color: #fff;
+    padding: .1875rem .9375rem;
+    bottom: 22px;
+
+    &:before{
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateY(-100%);
+        content: "";
+        width: 0;
+        height: 0;
+        border-color: transparent transparent #b13333;
+        border-style: solid;
+        border-width: 0 7.5px 7px;
+    }
+
+}
+.overlay__close{
+    width: 25px;
+    height: 25px;
+    background: svg-load('remove.svg', fill=#ff9a00, width=25px, height=25px) no-repeat;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+}
+.overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128,128,128,0.7)
+}
+.overlay__content{
+    background-color: #fff;
+    color: #000;
+    padding: 3.75rem 6.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #ff9a00;;
+    max-width: 50%;
+}
+.overlay__message{
+    font-weight: 600;
+    font-size: 38px;
 }

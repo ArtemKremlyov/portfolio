@@ -1,25 +1,32 @@
 section.section.contacts
         .container.container--form
            .contacts__headline Связаться со мной
-           form.form.form--center.form--left
+           form(@submit.prevent="submitForm").form.form--center.form--left
              .form__row
-               label.form__label
+               label.form__label(:class="{error: !nameValid}")
                  .form__text Введите ваше имя
-                 input(type='text',name='name').form__input
+                 input(type='text',name='name' @input="validateName").form__input.form__input--name
+                 .form__tooltip {{nameError}}
                  .form__label-icon
                    +icon('user','form__input-icon','white','30px','26px')
-               label.form__label
+               label.form__label(:class="{error: !emailValid}")
                  .form__text Введите ваш email
-                 input(type='text',name='name').form__input
+                 input(type='text',name='email' @input="validateEmail").form__input.form__input--email
+                 .form__tooltip {{emailError}}
                  .form__label-icon
                    +icon('envelope','form__input-icon','white','30px','29px')
              .form__row
-               label.form__label
+               label.form__label(:class="{error: !messageValid}")
                  .form__text Сообщение к письму
-                 textarea(type="text").form__textarea
+                 textarea(type="text" @input="validateComment" name='message').form__textarea
+                 .form__tooltip {{messageError}}
                  .form__label-icon.form__label-icon--textarea
                    +icon('message','form__input-icon','white','30px','29px')
-             button.send-btn Отправить
+             button(@click.prevent="submitForm").send-btn Отправить
+        .overlay
+         .overlay__content
+             .overlay__message {{resultMessage}}
+             button.overlay__close
         footer.footer
             .container.container--footer
               .footer__copyright
