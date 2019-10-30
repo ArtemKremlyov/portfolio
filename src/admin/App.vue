@@ -743,6 +743,7 @@ input{
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content:space-between;
 }
 .group__row-input{
     color: #414c63;
@@ -823,7 +824,8 @@ input{
     box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
 
     &--skills{
-        width: calc(50%);
+        width: calc(100%/2 - 2*10px);
+        margin-bottom: 25px;
         @include phones{
             width: 100%;
         }
@@ -1004,7 +1006,6 @@ input{
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: center;
     margin-bottom: 40px;
 
     @include tablets{
