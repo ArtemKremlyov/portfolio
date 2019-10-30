@@ -5,6 +5,7 @@
 }
 .portfolio__gallery{
     margin-top: 95px;
+    position:relative;
 
     @include desktop{
         max-width: 675px;
@@ -17,6 +18,9 @@
     @include tablets{
         margin-bottom: 83px;
     }
+}
+.gallery__bigpict{
+    width: 800px;
 }
 .portfolio__right{
     max-width: 340px;
@@ -50,7 +54,9 @@
     position: absolute;
     bottom: 65px;
     right: 0px;
-
+    @include tablets{
+        bottom: 0;
+                 }
     @include phones{
         display: none;
     }
@@ -97,6 +103,7 @@
     transition: 0.4s;
     position: relative;
     height: 100px;
+    max-width: 190px;
     &:hover{
         &::after{
             content: '';
@@ -108,7 +115,7 @@
             background: rgba(#ff9a00,0.6);
         }
       }
-    &--active{
+    &.active{
        outline: #ff9a00 3px solid;
        margin-right: 3px;
     }
