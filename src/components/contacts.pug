@@ -5,28 +5,28 @@ section.section.contacts
              .form__row
                label.form__label(:class="{error: !nameValid}")
                  .form__text Введите ваше имя
-                 input(type='text',name='name' @input="validateName").form__input.form__input--name
+                 input(type='text',name='name' @input="validateName" autocomplete="off").form__input.form__input--name
                  .form__tooltip {{nameError}}
                  .form__label-icon
                    +icon('user','form__input-icon','white','30px','26px')
                label.form__label(:class="{error: !emailValid}")
                  .form__text Введите ваш email
-                 input(type='text',name='email' @input="validateEmail").form__input.form__input--email
+                 input(type='text',name='email' @input="validateEmail" autocompleted="off").form__input.form__input--email
                  .form__tooltip {{emailError}}
                  .form__label-icon
                    +icon('envelope','form__input-icon','white','30px','29px')
              .form__row
                label.form__label(:class="{error: !messageValid}")
                  .form__text Сообщение к письму
-                 textarea(type="text" @input="validateComment" name='message').form__textarea
+                 textarea(type="text" @input="validateComment" name='message' autocompleted="off").form__textarea
                  .form__tooltip {{messageError}}
                  .form__label-icon.form__label-icon--textarea
                    +icon('message','form__input-icon','white','30px','29px')
              button(@click.prevent="submitForm").send-btn Отправить
-        .overlay
-         .overlay__content
-             .overlay__message {{resultMessage}}
-             button.overlay__close
+             .overlay(@click="hideOverlay" :class="{disabled: overlayHidden}")
+                    .overlay__content
+                         .overlay__message {{resultMessage}}
+                         button().overlay__close
         footer.footer
             .container.container--footer
               .footer__copyright

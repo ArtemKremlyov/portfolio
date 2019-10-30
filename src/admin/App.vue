@@ -95,7 +95,7 @@
                                input(type="text" value="Новый навык").group__adding-input
                                input(type="number" min="0" max="100" value="100").group__adding-percent
                                button.group__adding-plus
-                .container
+                .container.container--works
                     .works
                         .works__title Блок «Работы»
                         .works__section
@@ -220,6 +220,9 @@
 input{
     border: none;
 }
+.container--works{
+    padding-top: 75px;
+}
 .group__upload-edit{
     color: #383bcf;
     font-family: "Open Sans";
@@ -291,6 +294,7 @@ input{
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 .new__item{
     box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
@@ -477,6 +481,7 @@ input{
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
+    margin-bottom: 30px;
 
 }
 .works__img{
@@ -1000,6 +1005,7 @@ input{
     align-items: center;
     width: 100%;
     justify-content: center;
+    margin-bottom: 40px;
 
     @include tablets{
         justify-content: flex-start;
@@ -1048,19 +1054,17 @@ input{
 }
 .navbar__item{
     margin-right: 60px;
-    padding: 0 25px;
-    padding-bottom: 20px;
 
     &.active {
-        border-bottom: 3px solid #383bcf;
         .navbar__item-link{
-            color: #383bcf
+            color: #383bcf;
+            border-bottom: 3px solid #383bcf;
         }
     }
     &:hover{
-        border-bottom: 3px solid #383bcf;
         .navbar__item-link{
-            color: #383bcf
+            color: #383bcf;
+            border-bottom: 3px solid #383bcf;
         }
     }
     @include phones{
@@ -1073,6 +1077,9 @@ input{
     font-family: "Open Sans";
     font-size: 16px;
     font-weight: 400;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .maincontent{

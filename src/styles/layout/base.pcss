@@ -203,6 +203,17 @@ h6 {
   font-weight: normal;
   margin: 0;
 }
+@-webkit-keyframes autofill {
+  to {
+    background: transparent;
+    color: white;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
 
 p {
   margin: 0;
@@ -239,4 +250,7 @@ img {
   @include tablets{
     display: block;
   }
+}
+.container--abou{
+  padding-top: 55px;
 }
