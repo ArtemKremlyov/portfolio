@@ -9,6 +9,19 @@
         margin-bottom: 15px;
     }
 }
+.skills{
+    min-height: 100vh;
+    height:auto;
+    display: flex;
+    align-items: center;
+    background-image:url('../images/content/skills-bck.png');
+
+    @include tablets{
+        min-height: 100vh;
+        height:auto;
+        flex-direction: column-reverse;
+    }
+}
 .skills__info{
     width: 590px;
     margin-bottom: 92px;
