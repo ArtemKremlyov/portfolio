@@ -3,7 +3,7 @@
     .login__content
         .login__title Авторизация
         button.login__close
-        form.form__login
+        form(@submit.prevent="login").form__login
             .form__row
                 label.form__label
                     .form__text Логин
@@ -12,28 +12,45 @@
             .form__row
                 label.form__label
                     .form__text Пароль
-                    input(type="password").form__input
+                    input(type="password" v-model="user.password").form__input
                     .form__icon
             button.form__btn Отправить
 </template>
 
 <script>
+    import $axios from '@/request';
     export default {
-        name: "authorization",
-        data(){
-            return {
-                user:{
-                    name:"",
-                    password:""
-                },
+
+        template: ".form__login",
+        data: () => ({
+            user:{
+                name:'',
+                password:''
             }
-        }
-    }
+    }),
+        methods:{
+            async login(){
+                try{
+                    const response = await $axios.post("/login",this.user)
+                    console.log(response)
+                    const token = response.data.token;
+
+                    this.$router.replace("/")
+
+                    localStorage.setItem("token",token)
+                }
+                catch (error) {
+
+                }
+
+            }
+        },
+    };
 </script>
 
 <style lang="postcss">
-    @import '../../styles/mixins.pcss';
-    @import '../../styles/layout/normalize.css';
+    @import '../../../styles/mixins.pcss';
+    @import '../../../styles/layout/normalize.css';
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
 
@@ -41,7 +58,7 @@
         position: relative;
         width: 100%;
         height: 100vh;
-        background-image: url("../../images/content/bck.png");
+        background-image: url("../../../images/content/bck.png");
         background-size:cover;
         display: flex;
         justify-content: center;

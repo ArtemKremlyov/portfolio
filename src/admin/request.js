@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
-axios.default.baseURL="https://webdev-api.loftschool.com/";
+const token = localStorage.getItem('token')
 
+axios.defaults.baseURL = "https://webdev-api.loftschool.com/";
 axios.defaults.headers["Authorization"] = `Bearer ${token}`;
 
 axios.interceptors.response.use(
@@ -24,5 +25,4 @@ axios.interceptors.response.use(
     }
 );
 
-export default axios
-
+export default axios;

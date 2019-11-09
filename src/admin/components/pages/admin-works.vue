@@ -11,7 +11,7 @@
                         .group__row
                             label.group__upload
                                 .group__upload-tablets
-                                    img(src="../../images/content/mobile-img.png").group__upload-adaptive
+                                    img(src="../../../images/content/mobile-img.png").group__upload-adaptive
                                     button.group__upload-edit Изменить превью
                                 .group__upload-desktop
                                     .group__upload-text Перетащите или загрузите для загрузки изображения
@@ -53,7 +53,7 @@
                             li.works__tags-item html
                             li.works__tags-item css
                             li.works__tags-item js
-                        img(src="../../images/content/mini-prev1.png").works__img
+                        img(src="../../../images/content/mini-prev1.png").works__img
                     .works__content
                         .works__content-title
                         .works__content-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
@@ -74,9 +74,9 @@
 </script>
 
 <style lang="postcss">
-    @import '../../styles/mixins.pcss';
-    @import '../../styles/layout/base.pcss';
-    @import '../../styles/layout/normalize.css';
+    @import '../../../styles/mixins.pcss';
+    @import '../../../styles/layout/base.pcss';
+    @import '../../../styles/layout/normalize.css';
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
 

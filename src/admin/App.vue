@@ -46,7 +46,7 @@ body{
 
 </style>
 <script>
-
+    import { mapState, mapActions, mapGetters } from "vuex";
     export default {
         components: {
             adminHeader: () => import("components/admin-header"),

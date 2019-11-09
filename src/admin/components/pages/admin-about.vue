@@ -4,9 +4,9 @@
         .about__flex-headline Блок «Обо мне»
         button.about__flex-adding Добавить группу
     .about__section
-        form.group.group--skills
+        form(@submit.prevent="addNewCategory").group.group--skills
             .group__title
-                input(value="Название новой группы").group__input
+                input(value="Название новой группы" v-model="title").group__input
                 .group__tittle-controls
                     button.ok-btn
                     button.canselled-btn
@@ -16,49 +16,41 @@
                 input(type="text" value="Новый навык").group__adding-input
                 input(type="number" min="0" max="100").group__adding-percent
                 button.group__adding-plus
-        form.group.group--skills
-            .group__title
-                input(value="Frontend").group__input
-                .group__tittle-controls
-                    button.ok-btn
-                    button.canselled-btn
-            hr.group__separator
-            .group__content
-               -for(i=0;i<4;i++)
-                .group__row
-                    input(type="text" value="Git").group__row-input
-                    input(type="number" min="0" max="100" placeholder="50").group__adding-percent
-                    .group__row-btns
-                        button.pencil
-                        button.trash
-            .group__adding
-                input(type="text" value="Новый навык").group__adding-input
-                input(type="number" min="0" max="100").group__adding-percent
-                button.group__adding-plus
-        form.group.group--skills
-            .group__title
-                input(value="Frontend").group__input
-                .group__tittle-controls
-                    button.ok-btn
-                    button.canselled-btn
-            hr.group__separator
-            .group__content
-               -for(i=0;i<4;i++)
-                .group__row
-                    input(type="text" value="Git").group__row-input
-                    input(type="number" min="0" max="100" placeholder="50").group__adding-percent
-                    .group__row-btns
-                        button.pencil
-                        button.trash
-            .group__adding
-                input(type="text" value="Новый навык").group__adding-input
-                input(type="number" min="0" max="100" value="100").group__adding-percent
-                button.group__adding-plus
+        ul.about__list
+            li(v-for="category in categories" :key="categories.id").group.group--skills
+                aboutGroup(
+                    :category="category"
+                )
 </template>
 
 <script>
+    import {mapActions, mapState } from "vuex";
     export default {
-        name: "admin-about"
+        components:{
+            aboutGroup : () => import("../admin-about-group.vue")
+        },
+        data: () => ({
+            title: ""
+        }),
+        created(){
+            this.fetchCategories();
+        },
+        computed:{
+            ...mapState("categories",{
+                categories: state => state.categories
+          })
+        },
+        methods: {
+            ...mapActions("categories",["addCategory", "fetchCategories"]),
+           async addNewCategory() {
+               try {
+                  await this.addCategory(this.title)
+               }
+               catch (error) {
+                  alert(error.message)
+               }
+            }
+        }
     }
 </script>
 
@@ -68,7 +60,9 @@
     @import '../../../styles/layout/normalize.css';
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
-
+    .group__adding-percent{
+        color: black;
+    }
     .about__flex{
         display: flex;
         align-items: center;
@@ -341,6 +335,7 @@
     }
     .group__adding-percent{
         margin-right: 30px;
+        position: relative;
 
         &:after{
             content: "%";
@@ -349,8 +344,8 @@
             font-size: 1rem;
             font-weight: 400;
             display: block;
-            right: 0;
-            top: 50%;
+            right: -23px;
+            top: 5%;
         }
         @include tablets{
             flex: 0.1;

@@ -31,6 +31,9 @@
         flex-direction: row;
         justify-content: space-between;
     }
+    button{
+        background: transparent;
+    }
     .header__admin{
         height:80px;
         width: 100%;
