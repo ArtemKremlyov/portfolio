@@ -63,6 +63,39 @@
     .group__adding-percent{
         color: black;
     }
+    .pencil{
+        width: 16px;
+        height: 16px;
+        background: svg-load("pencil.svg",fill="#414c63",width="16px",height="16px") center center no-repeat;
+        margin-right: 20px;
+
+        &--works{
+            background: svg-load("pencil.svg",fill="#383bcf",width="16px",height="16px") center center no-repeat;
+        }
+    }
+    .trash{
+        width: 16px;
+        height: 16px;
+        background: svg-load("trash.svg",fill="#414c63",width="16px",height="16px") center center no-repeat;
+
+        &--works{
+            background: svg-load("trash.svg",fill="#c92e2e",width="16px",height="16px") center center no-repeat;
+        }
+    }
+
+
+
+
+    .ok-btn{
+        width: 30px;
+        height: 30px;
+        background: svg-load("tick.svg",fill="green",width="15px",height="15px") center center no-repeat;
+    }
+    .canselled-btn{
+        width: 30px;
+        height: 30px;
+        background: svg-load("remove.svg",fill="#bf2929",width="15px",height="15px") center center no-repeat;
+    }
     .about__flex{
         display: flex;
         align-items: center;

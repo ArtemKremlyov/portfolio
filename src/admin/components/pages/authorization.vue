@@ -34,10 +34,9 @@
                     const response = await $axios.post("/login",this.user)
                     console.log(response)
                     const token = response.data.token;
-
+                    localStorage.setItem("token",token)
                     this.$router.replace("/")
 
-                    localStorage.setItem("token",token)
                 }
                 catch (error) {
 

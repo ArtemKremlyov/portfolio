@@ -2,27 +2,30 @@
     .container.container--new
         .new
             .new__title Блок «Отзывы»
-            .group-works__title Редактирование работы
+            .group-works__title Добавить отзыв
             .group__separator
             .new__section
-                form.group.group--new
+                form.group.group--new(@submit.prevent="addNewReview")
                     .group__left
                         label.group__left-upload
-                            .group__left-img
-                            input(type="file").group__left-file
+                            .group__left-img(
+                                :class="{filled: renderedPhoto.length}"
+                                :style="{backgroundImage: `url(${renderedPhoto})`}"
+                                )
+                            input(type="file" @change="appendFileRenderPhoto").group__left-file
                             .group__left-text Добавить фото
                     .group__right
                         .group__row
                             label.group__label
                                 .group__label-text Имя автора
-                                input(type="text").group__input-new
+                                input(type="text" v-model="review.autor").group__input-new
                             label.group__label
                                 .group__label-text Титул автора
-                                input(type="text").group__input-new
+                                input(type="text" v-model="review.occ").group__input-new
                         .group__row
                             label.group__label
                                 .group__label-text Отзыв
-                                textarea(type="text").group__textarea
+                                textarea(type="text" v-model="review.text").group__textarea
                         .group__controls
                             button.group__controls-cancell Отменить
                             button.group__btn Сохранить
@@ -31,28 +34,74 @@
                     .new__item-btn
                         .new__item-plus
                         .new__text Добавить отзыв
-                -for(i=0;i<5;i++)
-                    .new__item.new__item--line
-                        .new__personal
-                            .new__item-ava
-                                img.new__item-img
-                            .new__info
-                                .new__info-name Владимир Сабанцев
-                                .new__info-rang Преподаватель
-                        .group__separator
-                        .new__item-text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                        .admin-btns
-                            button.admin-btns__item
-                                .admin-btns__text Править
-                                .pencil.pencil--works
-                            button.admin-btns__item
-                                .admin-btns__text Удалить
-                                .trash.trash--works
+
+                review-item(
+                    v-for="review in reviews"
+                    :key="reviews.id"
+                    :review="review"
+                )
 </template>
 
 <script>
+    import {mapActions, mapState } from "vuex";
     export default {
-        name: "admin-new"
+        components: {reviewItem : () => import("../review-item.vue")},
+        data:() => ({
+            renderedPhoto: '',
+            review:{
+                photo:'',
+                autor:'',
+                text:'',
+                occ:''
+            },
+            test:"true"
+        }),
+        created() {
+            this.fetchReviews()
+        },
+        computed:{
+            ...mapState("reviews",{
+                reviews:state => state.reviews
+            })
+        },
+        methods:{
+            ...mapActions("reviews",["addReview","fetchReviews"]),
+            async addNewReview(){
+               try{
+                await this.addReview(this.review)
+                console.log("Ok")
+                this.review.photo = ""
+                this.review.occ = ""
+                this.review.text = ""
+                this.review.author = ""
+               }
+                catch {e} {
+
+                }
+            },
+            appendFileRenderPhoto(e){
+                const file = e.target.files[0]
+                this.review.photo = file
+
+                const reader = new FileReader();
+
+                try{
+                    reader.readAsDataURL(file);
+                    reader.onload = () =>{
+                        this.renderedPhoto = reader.result
+                    }
+                }
+                catch (error) {
+
+                }
+            },
+            cancellWrite(){
+                    this.review.photo='';
+                    this.review.autor='';
+                    this.review.text='';
+                    this.review.occ='';
+            }
+        }
     }
 </script>
 
@@ -64,6 +113,115 @@
 
     .new__personal{
         display: flex;
+    }
+    .group__input-new{
+        width: 100%;
+        height: 45px;
+        border-bottom: 1px solid #414c63;;
+        color: #414c63;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .group__left-file{
+        display: none;
+    }
+    .group__left{
+        margin-right: 20px;
+        flex:0.3;
+
+        @include phones{
+            margin-right: 0;
+            @include phones{
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .group__right{
+        flex: 1;
+        @include tablets{
+            flex: none;
+            width: 50%;
+        }
+        @include phones{
+            margin-bottom: 30px;
+            width: 100%;
+        }
+    }
+    .group__left-upload{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .group__left-text{
+        color: #383bcf;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .new{
+        width: 100%;
+    }
+    .group__left-img{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: #dee4ed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+
+        &:before{
+            content: "";
+            width: 85px;
+            height: 113px;
+            background: svg-load("user.svg", fill="white", width="85px", height="113px") center center no-repeat;
+        }
+        &.filled {
+            background: center center no-repeat / cover;
+            &:before {
+                display: none;
+            }
+        }
+
+    }
+
+    .pencil{
+        width: 16px;
+        height: 16px;
+        background: svg-load("pencil.svg",fill="#414c63",width="16px",height="16px") center center no-repeat;
+        margin-right: 20px;
+
+        &--works{
+            background: svg-load("pencil.svg",fill="#383bcf",width="16px",height="16px") center center no-repeat;
+        }
+    }
+
+    .trash{
+        width: 16px;
+        height: 16px;
+        background: svg-load("trash.svg",fill="#414c63",width="16px",height="16px") center center no-repeat;
+
+        &--works{
+            background: svg-load("trash.svg",fill="#c92e2e",width="16px",height="16px") center center no-repeat;
+        }
+    }
+
+
+
+
+    .ok-btn{
+        width: 30px;
+        height: 30px;
+        background: svg-load("tick.svg",fill="green",width="15px",height="15px") center center no-repeat;
+    }
+    .canselled-btn{
+        width: 30px;
+        height: 30px;
+        background: svg-load("remove.svg",fill="#bf2929",width="15px",height="15px") center center no-repeat;
     }
     .new__info-name{
         color: #414c63;
@@ -92,6 +250,8 @@
         height: 50px;
         border-radius: 50%;
         overflow: hidden;
+        object-fit: cover;
+        background-position: center center;
         background: red;
         margin-right: 12px;
     }
