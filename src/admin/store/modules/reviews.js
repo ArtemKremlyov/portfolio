@@ -11,15 +11,17 @@ export default {
             state.reviews.unshift(reviews)
         },
         REMOVE_REVIEW(state,deletedRev){
-            state.reviews = state.reviews.filter(review => review.id !== deletedRev.id)
+            state.reviews = state.reviews.filter(review => review.id !== deletedRev)
+            console.log("mutation calling")
         }
     },
     actions:{
        async deleteReview({commit},reviewId){
            try{
-               await this.$axios.delete(`/reviews/${reviewId}`)
+               const {data} = await this.$axios.delete(`/reviews/${reviewId}`)
                commit("REMOVE_REVIEW",reviewId)
                console.log("удалено")
+               console.log(data)
            }
            catch (e) {
 

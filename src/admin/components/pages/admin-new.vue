@@ -5,7 +5,7 @@
             .group-works__title Добавить отзыв
             .group__separator
             .new__section
-                form.group.group--new(@submit.prevent="addNewReview")
+                form.group.group--new(@submit.prevent="addNewReview" :class="{hide: hiddenForm}")
                     .group__left
                         label.group__left-upload
                             .group__left-img(
@@ -27,10 +27,10 @@
                                 .group__label-text Отзыв
                                 textarea(type="text" v-model="review.text").group__textarea
                         .group__controls
-                            button.group__controls-cancell Отменить
+                            button.group__controls-cancell(@click.prevent="hideThisForm('hide')") Отменить
                             button.group__btn Сохранить
             .new__section
-                .new__item.new__item--line.new__item--adding
+                .new__item.new__item--line.new__item--adding(@click="hideThisForm('unhide')")
                     .new__item-btn
                         .new__item-plus
                         .new__text Добавить отзыв
@@ -48,6 +48,7 @@
         components: {reviewItem : () => import("../review-item.vue")},
         data:() => ({
             renderedPhoto: '',
+            hiddenForm:true,
             review:{
                 photo:'',
                 autor:'',
@@ -93,6 +94,16 @@
                 }
                 catch (error) {
 
+                }
+            },
+            hideThisForm(type){
+                console.log("true")
+                if (type = "unhide"){
+                    this.hiddenForm = false;
+                }
+                else if (type = "hide") {
+                    this.hiddenForm = true;
+                    console.log(this.hiddenForm)
                 }
             },
             cancellWrite(){

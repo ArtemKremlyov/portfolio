@@ -10,30 +10,34 @@
                     .group__column
                         .group__row
                             label.group__upload
+                                .group__uploaded(
+                                    :class="{filled: renderedPhoto.length}"
+                                    :style="{backgroundImage: `url(${renderedPhoto})`}"
+                                )
                                 .group__upload-tablets
                                     img(src="../../../images/content/mobile-img.png").group__upload-adaptive
                                     button.group__upload-edit Изменить превью
-                                .group__upload-desktop
+                                .group__upload-desktop(:class="{none: renderedPhoto.length}")
                                     .group__upload-text Перетащите или загрузите для загрузки изображения
-                                    input(type="file").group__upload-img
+                                    input(type="file" @change="appendFileRenderPhoto").group__upload-img
                                     button.group__btn.group__btn--upload Загрузить
                     .group__column
                         .group__row
                             label.group__label
                                 .group__label-text Название
-                                input.group__input-works
+                                input.group__input-works(v-model="works.title")
                         .group__row
                             label.group__label
                                 .group__label-text Cсылка
-                                input.group__input-works
+                                input.group__input-works(v-model="works.link")
                         .group__row
                             label.group__label
                                 .group__label-text Описание
-                                textarea.group__textarea
+                                textarea.group__textarea(v-model="works.description")
                         .group__row
                             label.group__label
                                 .group__label-text Добавление тэга
-                                input.group__input-works
+                                input.group__input-works(v-model="works.techs")
                                 ul.group__tags
                                     li.group__tags-item HTML
                                     li.group__tags-item CSS
@@ -55,9 +59,9 @@
                             li.works__tags-item js
                         img(src="../../../images/content/mini-prev1.png").works__img
                     .works__content
-                        .works__content-title
-                        .works__content-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                        a(href="#").works__content-link http://loftschool.ru
+                        .works__content-title {{works.title}}
+                        .works__content-text {{works.description}}
+                        a(href="#").works__content-link {{works.link}}
                         .admin-btns
                             button.admin-btns__item
                                 .admin-btns__text Править
@@ -70,11 +74,34 @@
 <script>
     export default {
         data: () =>({
-          review:{
+          renderedPhoto:"",
+          works:{
+              title:"",
+              techs:"",
               photo:"",
-              title:""
-          }
-        })
+              link:"",
+              description:""
+          },
+
+        }),
+        methods:{
+            appendFileRenderPhoto(e){
+                const file = e.target.files[0]
+                this.works.photo = file
+
+                const reader = new FileReader();
+
+                try{
+                    reader.readAsDataURL(file);
+                    reader.onload = () =>{
+                        this.renderedPhoto = reader.result
+                    }
+                }
+                catch (error) {
+
+                }
+            },
+        }
     }
 </script>
 
@@ -83,8 +110,13 @@
     @import '../../../styles/layout/base.pcss';
     @import '../../../styles/layout/normalize.css';
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
-
-
+    .works__content-title{
+        color: #414c63;
+        font-family: "Open Sans";
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 26px;
+    }
     .works__pic{
         position: relative;
     }
@@ -229,6 +261,15 @@
             }
         }
     }
+    .group__uploaded{
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        &.filled{
+            display: block;
+        }
+    }
     .group__upload{
         border: 1px dashed #a1a1a1;
         background-color: #dee4ed;
@@ -238,6 +279,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        position: relative;
 
         @include tablets{
             border: none;
@@ -267,6 +309,9 @@
         }
     }
     .group__upload-desktop{
+        &.none{
+            display: none;
+        }
         @include tablets{
             display: none;
         }
@@ -344,6 +389,9 @@
         &--new{
             width: 100%;
             display: flex;
+            &.hide{
+                display: none;
+            }
             @include tablets{
                 justify-content: center;
             }

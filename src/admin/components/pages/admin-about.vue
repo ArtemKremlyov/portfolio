@@ -17,9 +17,9 @@
                 input(type="number" min="0" max="100").group__adding-percent
                 button.group__adding-plus
         ul.about__list
-            li(v-for="category in categories" :key="categories.id").group.group--skills
                 aboutGroup(
                     :category="category"
+                    v-for="category in categories" :key="categories.id"
                 )
 </template>
 
@@ -50,6 +50,7 @@
                   alert(error.message)
                }
             }
+
         }
     }
 </script>
