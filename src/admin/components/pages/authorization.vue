@@ -5,20 +5,23 @@
         button.login__close
         form(@submit.prevent="login").form__login
             .form__row
-                label.form__label
+                label.form__label(:class="{error: !nameValid}")
                     .form__text Логин
-                    input(type="text" v-model="user.name").form__input
+                    input(type="text" v-model="user.name" @input="validateName").form__input
                     .form__icon
+                    .error-toltip {{nameError}}
             .form__row
-                label.form__label
+                label.form__label(:class="{error: !passwordValid}")
                     .form__text Пароль
-                    input(type="password" v-model="user.password").form__input
+                    input(type="password" v-model="user.password" @input="validatePassword").form__input
                     .form__icon
-            button.form__btn Отправить
+                    .error-toltip {{passwordError}}
+            button.form__btn() Отправить
 </template>
 
 <script>
     import $axios from '@/request';
+    import {mapActions} from "vuex"
     export default {
 
         template: ".form__login",
@@ -26,23 +29,62 @@
             user:{
                 name:'',
                 password:''
-            }
+            },
+            disabled : "false",
+            nameValid : "false",
+            nameError : "",
+            passwordError : "",
+            passwordValid : "false",
     }),
         methods:{
+            ...mapActions("message", ["showTooltip"]),
             async login(){
                 try{
+                   if(this.nameValid && this.passwordValid){
                     const response = await $axios.post("/login",this.user)
                     console.log(response)
                     const token = response.data.token;
                     localStorage.setItem("token",token)
                     this.$router.replace("/")
 
-                }
-                catch (error) {
+                       this.showTooltip({
+                           type: "success",
+                           text: "Успешный логин!"
+                       });
+                   }
 
                 }
+                catch (response) {
+                    console.log(response),
+                    this.showTooltip({
+                        type: "error",
+                        text: "Неуспешный логин!",
+                    });
+                }
 
-            }
+            },
+            validateName(){
+                if (this.user.name.length < 3){
+                    this.nameValid = false
+                    this.nameError = "Короткое имя пользователя"
+                }
+                else{
+                    this.nameValid = true;
+                    this.nameError = ""
+                }
+                return this.nameValid;
+            },
+            validatePassword(){
+                if (this.user.password.length < 5){
+                    this.passwordValid = false
+                    this.passwordError = "Короткий пароль"
+                }
+                else{
+                    this.passwordValid = true;
+                    this.passwordError = ""
+                }
+                return this.passwordValid;
+            },
         },
     };
 </script>
@@ -52,7 +94,32 @@
     @import '../../../styles/layout/normalize.css';
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
+    .error-toltip{
+        display: none;
+        position: absolute;
+        background: #b13333;
+        font-size: .875rem;
+        font-weight: 400;
+        color: #fff;
+        padding: .1875rem .9375rem;
+        bottom: -23px;
+        right: 30%;
 
+
+            &:before{
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translateY(-100%);
+                content: "";
+                width: 0;
+                height: 0;
+                border-color: transparent transparent #b13333;
+                border-style: solid;
+                border-width: 0 7.5px 7px;
+            }
+
+    }
     .login{
         position: relative;
         width: 100%;
@@ -152,6 +219,13 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        position: relative;
+
+        &.error{
+            .error-toltip{
+                display: block;
+            }
+        }
     }
     .form__text{
         opacity: 0.4;

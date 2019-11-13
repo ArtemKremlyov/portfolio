@@ -11,12 +11,17 @@
                 .admin-info__panel Панель администрирования
         .header__right
             .header__right-exit
-                a(href="#").header__right-link Выйти
+                a(@click="logout").header__right-link Выйти
 </template>
 
 <script>
+    import $axios from "../request";
     export default {
-        name: "admin-header"
+        methods: {
+            logout() {
+                //
+            }
+        },
     }
 </script>
 

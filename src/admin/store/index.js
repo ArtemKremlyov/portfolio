@@ -8,6 +8,7 @@ import user from "./modules/user";
 import skills from "./modules/skills"
 import reviews from "./modules/reviews"
 import works from "./modules/works"
+import message from "./modules/message"
 
 export default new Vuex.Store({
     modules: {
@@ -15,6 +16,7 @@ export default new Vuex.Store({
         user,
         skills,
         reviews,
-        works
+        works,
+        message
     }
 })

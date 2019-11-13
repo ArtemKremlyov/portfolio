@@ -2,35 +2,38 @@
     .container.container--new
         .new
             .new__title Блок «Отзывы»
-            .group-works__title Добавить отзыв
+            .group-works__title {{(mode==='edit') ? 'Редактировать работу' : 'Добавить отзыв'}}
             .group__separator
             .new__section
-                form.group.group--new(@submit.prevent="addNewReview" :class="{hide: hiddenForm}")
+                form.group.group--new(@submit.prevent="addNewReview" :class="{hide: addFormVisible}")
                     .group__left
                         label.group__left-upload
                             .group__left-img(
-                                :class="{filled: renderedPhoto.length}"
-                                :style="{backgroundImage: `url(${renderedPhoto})`}"
+                                :class="{filled: photoUrl.length}"
+                                :style="{backgroundImage: `url(${photoUrl})`}"
                                 )
-                            input(type="file" @change="appendFileRenderPhoto").group__left-file
+                            input(type="file" @change="loadPhoto").group__left-file
                             .group__left-text Добавить фото
                     .group__right
                         .group__row
                             label.group__label
                                 .group__label-text Имя автора
-                                input(type="text" v-model="review.autor").group__input-new
+                                input(type="text" v-model="review.author").group__input-new
+                                .tooltip
                             label.group__label
                                 .group__label-text Титул автора
                                 input(type="text" v-model="review.occ").group__input-new
+                                .tooltip
                         .group__row
                             label.group__label
                                 .group__label-text Отзыв
                                 textarea(type="text" v-model="review.text").group__textarea
+                                .tooltip
                         .group__controls
-                            button.group__controls-cancell(@click.prevent="hideThisForm('hide')") Отменить
-                            button.group__btn Сохранить
+                            button(@click.prevent="closeAddForm").group__controls-cancell Отменить
+                            button(@click.prevent="mode=='new' ? addNewReview() : updateUserRev()").group__btn Сохранить
             .new__section
-                .new__item.new__item--line.new__item--adding(@click="hideThisForm('unhide')")
+                .new__item.new__item--line.new__item--adding(@click="showAddForm('new')")
                     .new__item-btn
                         .new__item-plus
                         .new__text Добавить отзыв
@@ -39,6 +42,7 @@
                     v-for="review in reviews"
                     :key="reviews.id"
                     :review="review"
+                    @editUserRev="showAddForm('edit')"
                 )
 </template>
 
@@ -47,71 +51,123 @@
     export default {
         components: {reviewItem : () => import("../review-item.vue")},
         data:() => ({
-            renderedPhoto: '',
+            photoUrl: '',
             hiddenForm:true,
             review:{
                 photo:'',
-                autor:'',
+                author:'',
                 text:'',
                 occ:''
             },
-            test:"true"
+            test:"true",
+            mode:"",
+            addFormVisible:true
         }),
         created() {
             this.fetchReviews()
+
+            if (this.mode === "edit"){
+                this.getCurrentRev()
+            }
+
+        },
+        watch:{
+            currentRev(){
+                if(this.mode === "edit") this.getCurrentRev()
+            },
+            mode(){
+                if(this.mode === "edit") {
+                    this.getCurrentRev()
+                }
+                else{
+                    this.review = {}
+                    this.photoUrl = ""
+                }
+            },
         },
         computed:{
             ...mapState("reviews",{
                 reviews:state => state.reviews
-            })
+            }),
+            ...mapState("reviews",{
+                currentRev:state => state.currentRev
+            }),
+
         },
+
         methods:{
-            ...mapActions("reviews",["addReview","fetchReviews"]),
+            ...mapActions("message", ["showTooltip"]),
+            ...mapActions("reviews",["addReview","fetchReviews","updateReviews"]),
             async addNewReview(){
                try{
-                await this.addReview(this.review)
+
+                const response = await this.addReview(this.review)
                 console.log("Ok")
                 this.review.photo = ""
                 this.review.occ = ""
                 this.review.text = ""
                 this.review.author = ""
+                   console.log("wdwdwd")
+
+                   this.showTooltip({
+                       type: "success",
+                       text: "Отзыв успешно добавлен!"
+                   });
                }
-                catch {e} {
+                catch (error) {
+                    this.showTooltip({
+                        type: "error",
+                        text: error
+                    });
+                }
+            },
+            async updateUserRev(){
+                try{
+                    console.log('dwdw')
+                    await this.updateReviews(this.review)
+                }
+                catch (e) {
 
                 }
             },
-            appendFileRenderPhoto(e){
+            loadPhoto(e){
                 const file = e.target.files[0]
                 this.review.photo = file
+                this.getPhoto(file)
 
+            },
+            getPhoto(file){
                 const reader = new FileReader();
-
                 try{
-                    reader.readAsDataURL(file);
+                    reader.readAsDataURL(file)
                     reader.onload = () =>{
-                        this.renderedPhoto = reader.result
+                        this.photoUrl = reader.result;
                     }
                 }
-                catch (error) {
+                catch (e) {
 
                 }
             },
-            hideThisForm(type){
-                console.log("true")
-                if (type = "unhide"){
-                    this.hiddenForm = false;
-                }
-                else if (type = "hide") {
-                    this.hiddenForm = true;
-                    console.log(this.hiddenForm)
-                }
+            hideThisForm(){
+                this.addFormVisible = !this.addFormVisible
+                },
+
+            showAddForm(mode){
+                this.mode = mode
+                this.addFormVisible = false;
             },
-            cancellWrite(){
-                    this.review.photo='';
-                    this.review.autor='';
-                    this.review.text='';
-                    this.review.occ='';
+            getCurrentRev(){
+              this.review = {...this.currentRev}
+              this.review.photo = ""
+            },
+            closeAddForm(){
+                this.addFormVisible = true
+                this.review.author = ""
+                this.review.occ = ""
+                this.review.text = ""
             }
+
+
         }
     }
 </script>
@@ -261,7 +317,6 @@
         height: 50px;
         border-radius: 50%;
         overflow: hidden;
-        object-fit: cover;
         background-position: center center;
         background: red;
         margin-right: 12px;

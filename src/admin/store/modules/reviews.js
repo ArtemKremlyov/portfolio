@@ -1,7 +1,9 @@
+import { generateStdError } from "@/helpers/errorHandler";
 export default {
     namespaced:true,
     state: {
         reviews: [],
+        currentRev:{}
     },
     mutations:{
         SET_REVIEW(state,reviews){
@@ -10,9 +12,17 @@ export default {
         ADD_REVIEW(state,reviews){
             state.reviews.unshift(reviews)
         },
+        SET_CURRENT_REV(state,currentRevId){
+            state.currentRev = state.reviews.filter(
+                review => review.id === currentRevId
+            )[0]
+        },
         REMOVE_REVIEW(state,deletedRev){
             state.reviews = state.reviews.filter(review => review.id !== deletedRev)
             console.log("mutation calling")
+        },
+        UPDATE_REVIEW(state,updateRev){
+            state.reviews = state.reviews.map(review => review.id === updateRev.id ? updateRev : review)
         }
     },
     actions:{
@@ -23,8 +33,8 @@ export default {
                console.log("удалено")
                console.log(data)
            }
-           catch (e) {
-
+           catch (error) {
+               generateStdError(error);
            }
        } ,
        async addReview({commit},review) {
@@ -32,7 +42,7 @@ export default {
                 const formData = new FormData();
 
                 formData.append("text",review.text)
-                formData.append("author",review.autor)
+                formData.append("author",review.author)
                 formData.append("occ",review.occ)
                 formData.append("photo",review.photo)
 
@@ -40,8 +50,8 @@ export default {
                 commit("ADD_REVIEW",data)
                 console.log(data)
             }
-            catch (e) {
-
+            catch (error) {
+                generateStdError(error);
             }
         },
         async fetchReviews({commit}) {
@@ -51,9 +61,19 @@ export default {
                 console.log(data)
 
             }
-            catch (e) {
-
+            catch (error) {
+                generateStdError(error);
             }
-        }
+        },
+        async updateReviews({commit},review){
+           try{
+               const {data} = await this.$axios.post(`/reviews/${review.id}`,review)
+               commit("UPDATE_REVIEW", data)
+           }
+           catch (e) {
+                console.log(e)
+           }
+        },
+
     }
 }

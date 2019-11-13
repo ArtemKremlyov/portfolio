@@ -1,3 +1,4 @@
+import { generateStdError } from "@/helpers/errorHandler";
 export default {
     namespaced:true,
     state: {
@@ -11,7 +12,7 @@ export default {
             state.categories.unshift(category)
         },
         REMOVE_CATEGORY(state,removedCategory){
-            state.categories = state.categories.filter(category => category.id ==! removedCategory)
+            state.categories = state.categories.filter(category => category.id !== removedCategory)
         },
         ADD_SKILL(state,newSkill){
             state.categories = state.categories.map(category => {

@@ -1,15 +1,16 @@
 <template lang="pug">
-.admin-about__links
-    .navbar
-        ul.navbar__list
-            li.navbar__item
-                router-link(tag="button" to="/" class="navbar__item-link") Обо мне
+.container
+    .admin-about__links
+        .navbar
+            ul.navbar__list
+                li.navbar__item
+                    router-link(tag="button" to="/" class="navbar__item-link") Обо мне
 
-            li.navbar__item
-                router-link(tag="button" to="/works" class="navbar__item-link") Работы
+                li.navbar__item
+                    router-link(tag="button" to="/works" class="navbar__item-link") Работы
 
-            li.navbar__item
-                router-link(tag="button" to="/new" class="navbar__item-link") Отзывы
+                li.navbar__item
+                    router-link(tag="button" to="/new" class="navbar__item-link") Отзывы
 
 </template>
 

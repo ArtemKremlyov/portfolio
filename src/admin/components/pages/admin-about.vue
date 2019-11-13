@@ -30,7 +30,7 @@
             aboutGroup : () => import("../admin-about-group.vue")
         },
         data: () => ({
-            title: ""
+            title: "",
         }),
         created(){
             this.fetchCategories();
@@ -42,14 +42,23 @@
         },
         methods: {
             ...mapActions("categories",["addCategory", "fetchCategories"]),
+            ...mapActions("message",["showTooltip"]),
            async addNewCategory() {
                try {
                   await this.addCategory(this.title)
+                   this.showTooltip({
+                       type: "success",
+                       text: "Категория успешно добавлена!"
+                   });
                }
                catch (error) {
-                  alert(error.message)
+                   this.showTooltip({
+                       type: "error",
+                       text: error
+                   });
                }
-            }
+            },
+
 
         }
     }
@@ -347,6 +356,13 @@
         display: flex;
         justify-content: flex-end;
         width: 100%;
+        position: relative;
+
+        &.error{
+            .tooltip{
+                display: block;
+            }
+        }
     }
     .group__adding-input,.group__adding-percent{
         border-bottom: 1px black solid;

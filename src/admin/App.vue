@@ -1,11 +1,17 @@
 <template lang="pug">
-   .admin-about
-            admin-header()
-            admin-navbar()
-            router-view
+    .wrapper
+      template(v-if="$route.meta.public")
+        router-view
+        messages(:class="{visible: visible}")
+
+      template(v-else-if="userIsLogged")
+       .admin-about
+                admin-header()
+                admin-navbar()
+                router-view
 
 
-            .ad-about
+                messages(:class="{visible: visible}")
 
 </template>
 <style lang="postcss">
@@ -13,7 +19,44 @@
 @import '../styles/layout/normalize.css';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
+.tooltip{
+    display: none;
+    position: absolute;
+    background: #b13333;
+    font-size: .875rem;
+    font-weight: 400;
+    color: #fff;
+    padding: .1875rem .9375rem;
+    bottom: -23px;
+    right: 30%;
 
+
+    &:before{
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateY(-100%);
+        content: "";
+        width: 0;
+        height: 0;
+        border-color: transparent transparent #b13333;
+        border-style: solid;
+        border-width: 0 7.5px 7px;
+    }
+    &--skill{
+        right: 51%;
+    }
+
+}
+
+.group__label{
+    position: relative;
+    &.error{
+        .tooltip{
+            display: block;
+        }
+    }
+}
 
 input{
     border: none;
@@ -51,7 +94,25 @@ body{
         components: {
             adminHeader: () => import("components/admin-header"),
             adminNavbar: () => import("components/admin-navbar"),
+            messages: () => import("components/message"),
         },
-
+        computed:{
+            ...mapGetters("user",["userIsLogged"]),
+            ...mapState("message", { visible: state => state.visible })
+        },
+        methods: {
+            ...mapActions("message", ["closeTooltip"])
+        },
+        watch: {
+            visible(value) {
+                if (value === true) {
+                    let timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        this.closeTooltip();
+                    }, 3000);
+                }
+            }
+        },
     }
 </script>

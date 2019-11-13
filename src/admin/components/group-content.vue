@@ -31,14 +31,22 @@
             }
         },
         methods:{
+            ...mapActions("message", ["showTooltip"]),
             ...mapActions("skills",["removeSkill","editSkill"]),
             async editExistedSkill(){
                 try{
                     await this.editSkill(this.editedSkill)
                     this.editMode = false;
+                    this.showTooltip({
+                        type: "success",
+                        text: "Запись обновлена!"
+                    });
                 }
                 catch (error) {
-                    
+                    this.showTooltip({
+                        type: "error",
+                        text: error
+                    });
                 }
             },
             async removeExistedSkill(){
@@ -47,9 +55,16 @@
                         id:this.skill.id,
                         category:this.skill.category
                     })
+                    this.showTooltip({
+                        type: "success",
+                        text: "Скилл успешно удалена!"
+                    });
                 }
                 catch (error){
-
+                    this.showTooltip({
+                        type: "error",
+                        text: error
+                    });
                 }
             }
         }

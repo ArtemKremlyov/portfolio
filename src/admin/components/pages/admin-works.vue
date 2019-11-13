@@ -3,8 +3,8 @@
     .works
         .works__title Блок «Работы»
         .works__section
-            form.group.group--works
-                .group-works__title Редактирование работы
+            form.group.group--works(:class="{hide: addFormVisible}")
+                .group-works__title {{(mode==='edit') ? 'Редактировать работу' : 'Добавить отзыв'}}
                 .group__separator
                 .group__content.group__content--works
                     .group__column
@@ -23,71 +23,103 @@
                                     button.group__btn.group__btn--upload Загрузить
                     .group__column
                         .group__row
-                            label.group__label
+                            label.group__label(:class="{error: !titleValid}")
                                 .group__label-text Название
-                                input.group__input-works(v-model="works.title")
+                                input.group__input-works(v-model="work.title" @input="validateTitle")
+                                .tooltip {{titleError}}
                         .group__row
-                            label.group__label
+                            label.group__label(:class="{error: !linkValid}")
                                 .group__label-text Cсылка
-                                input.group__input-works(v-model="works.link")
+                                input.group__input-works(v-model="work.link" @input="validateLink")
+                                .tooltip {{linkError}}
                         .group__row
-                            label.group__label
+                            label.group__label(:class="{error: !descriptionValid}")
                                 .group__label-text Описание
-                                textarea.group__textarea(v-model="works.description")
+                                textarea.group__textarea(v-model="work.description" @input="validateDesc")
+                                .tooltip {{descriptionError}}
                         .group__row
-                            label.group__label
-                                .group__label-text Добавление тэга
-                                input.group__input-works(v-model="works.techs")
-                                ul.group__tags
-                                    li.group__tags-item HTML
-                                    li.group__tags-item CSS
-                                    li.group__tags-item JavaScript
+                            works-tags(
+                                :tags="work.techs"
+                                @defineTagsString="defineTagsString"
+                            )
                 .group__controls
                     button.group__controls-cancell Отменить
-                    button.group__btn Сохранить
+                    button.group__btn(@click.prevent="mode=='new' ? addWork() : updateUserWork()") Сохранить
         .works__section
             .works__item.works__item--adding.works__item--line
-                button.works__item-btn
+                button.works__item-btn(@click="showAddForm('new')")
                     .works__item-plus
                     .works__item-text Добавить работу
-            -for(i=0;i<5;i++)
-                .works__item.works__item--line
-                    .works__pic
-                        ul.works__tags
-                            li.works__tags-item html
-                            li.works__tags-item css
-                            li.works__tags-item js
-                        img(src="../../../images/content/mini-prev1.png").works__img
-                    .works__content
-                        .works__content-title {{works.title}}
-                        .works__content-text {{works.description}}
-                        a(href="#").works__content-link {{works.link}}
-                        .admin-btns
-                            button.admin-btns__item
-                                .admin-btns__text Править
-                                .pencil.pencil--works
-                            button.admin-btns__item
-                                .admin-btns__text Удалить
-                                .trash.trash--works
+            works-item(
+                v-for="work in works"
+                :key="works.id"
+                :work="work"
+                @editUserWork="showAddForm('edit')"
+                )
 </template>
 
 <script>
+    import {mapActions,mapState} from "vuex"
     export default {
+        components:{
+            worksItem : () => import("../works-item.vue"),
+            worksTags : () => import("../works-tags.vue")
+        },
+        computed:{
+            ...mapState("works",{
+                works:state => state.works
+            }),
+            ...mapState("works",{
+                currentWork:state => state.currentWork
+            }),
+        },
         data: () =>({
           renderedPhoto:"",
-          works:{
+          work:{
               title:"",
               techs:"",
               photo:"",
               link:"",
               description:""
           },
+          techsString : ""  ,
+          titleValid : "false",
+          titleError : "",
+          techsValid : "false",
+          techsError : "",
+          linkValid : "false",
+          linkError : "",
+          descriptionValid : "false",
+          descriptionError : "",
+          mode:'',
+          addFormVisible:true
 
         }),
+        created() {
+            this.fetchWorks()
+            if (this.mode === "edit"){
+                this.getCurrentWork()
+            }
+        },
+        watch:{
+            currentWork(){
+                if(this.mode === "edit") this.getCurrentWork()
+            },
+            mode(){
+                if(this.mode === "edit") {
+                    this.getCurrentWork()
+                }
+                else{
+                    this.work = {}
+                    this.photoUrl = ""
+                }
+            },
+        },
         methods:{
+            ...mapActions("works",["addNewWork", "fetchWorks","updateWorks"]),
             appendFileRenderPhoto(e){
                 const file = e.target.files[0]
-                this.works.photo = file
+                this.work.photo = file
 
                 const reader = new FileReader();
 
@@ -101,7 +133,74 @@
 
                 }
             },
-        }
+            async updateUserWork(){
+                try{
+                    console.log('dwdw')
+                    await this.updateWorks(this.work)
+                }
+                catch (e) {
+
+                }
+            },
+            validateTitle(){
+                if (this.work.title.length < 3){
+                    this.titleValid = false
+                    this.titleError = "Короткое имя пользователя"
+                }
+                else{
+                    this.titleValid = true;
+                    this.titleError = ""
+                }
+                return this.titleValid;
+            },
+            validateLink(){
+                if (this.work.link.length < 5){
+                    this.linkValid = false
+                    this.linkError = "Неверная ссылка"
+                }
+                else{
+                    this.linkValid = true;
+                    this.linkError = ""
+                }
+                return this.linkValid;
+            },
+            validateDesc(){
+                if (this.work.description.length < 10){
+                    this.descriptionValid = false
+                    this.descriptionError = "Короткое описание"
+                }
+                else{
+                    this.descriptionValid = true;
+                    this.descriptionError = ""
+                }
+                return this.descriptionValid;
+            },
+            defineTagsString(value){
+                this.work.techs = value;
+            },
+            async addWork(){
+                try{
+                    await this.addNewWork(this.work)
+                    console.log("okey")
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            },
+            getCurrentWork(){
+                this.work = {...this.currentWork}
+                this.work.photo = ""
+            },
+            showAddForm(mode){
+                this.mode = mode
+                this.addFormVisible = false;
+                if(mode==="new"){
+                    this.work.techs = ""
+                }
+            },
+
+        },
+
     }
 </script>
 
@@ -385,6 +484,9 @@
         }
         &--works{
             width: 100%;
+            &.hide{
+                display: none;
+            }
         }
         &--new{
             width: 100%;
@@ -431,7 +533,10 @@
 
     }
     .works__img{
+        height: 150px;
         width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .works__item{
         box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
