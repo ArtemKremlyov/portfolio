@@ -1,3 +1,4 @@
+import { generateStdError } from "@/helpers/errorHandler";
 export default {
     namespaced: true,
     state: {
@@ -37,7 +38,7 @@ export default {
                 const {data} = await this.$axios.post("/works", formData)
                 commit("ADD_WORKS",data)
             } catch (e) {
-                console.log(e)
+                generateStdError(e);
             }
 
 
@@ -48,25 +49,34 @@ export default {
               commit("REMOVE_WORKS",workId)
             }
             catch (e) {
-
+                generateStdError(e);
             }
         },
-        async fetchWorks({commit}) {
+        async fetchWorks({commit,rootGetters}) {
             try {
-                const {data} = await this.$axios.get("/works/194")
+                const userId = rootGetters["user/userId"]
+                const {data} = await this.$axios.get(`/works/${userId}`)
                 commit("SET_WORKS", data)
                 console.log(data)
             } catch (e) {
                 console.log(e)
             }
         },
-        async updateWorks({commit},work){
+        async updateWorks({commit},work,updatedPhoto){
             try{
-                const {data} = await this.$axios.post(`/works/${work.id}`,work)
-                commit("UPDATE_WORKS", data)
+                const formData = new FormData();
+
+                formData.append("title", work.title)
+                formData.append("techs", work.techs)
+                formData.append("photo", updatedPhoto)
+                formData.append("link", work.link)
+                formData.append("description", work.description)
+
+                const {data} = await this.$axios.post(`/works/${work.id}`,formData)
+                commit("UPDATE_WORKS", work)
             }
             catch (e) {
-                console.log(e)
+                generateStdError(e);
             }
         },
 }

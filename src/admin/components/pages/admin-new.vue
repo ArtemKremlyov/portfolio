@@ -7,13 +7,25 @@
             .new__section
                 form.group.group--new(@submit.prevent="addNewReview" :class="{hide: addFormVisible}")
                     .group__left
-                        label.group__left-upload
+                        label.group__left-upload(v-if="mode==='new'")
                             .group__left-img(
                                 :class="{filled: photoUrl.length}"
                                 :style="{backgroundImage: `url(${photoUrl})`}"
-                                )
+                            )
                             input(type="file" @change="loadPhoto").group__left-file
                             .group__left-text Добавить фото
+                                .group__left
+                        label.group__left-upload(v-else-if="mode==='edit'")
+                            .group__left-img.filled(v-if="photoUrl.length"
+                                :class="{filled: photoUrl.length}"
+                                :style="{backgroundImage: `url(${photoUrl})`}"
+                            )
+                            .group__left-img.filled(v-else
+                                :class="{filled: photoUrl.length}"
+                                :style="{backgroundImage: `url(${image})`}"
+                            )
+                            input(type="file" @change="loadPhoto").group__left-file
+                            .group__left-text Изменить фото
                     .group__right
                         .group__row
                             label.group__label
@@ -92,6 +104,9 @@
             ...mapState("reviews",{
                 currentRev:state => state.currentRev
             }),
+            image: function() {
+                return `https://webdev-api.loftschool.com/${this.currentRev.photo}`
+            },
 
         },
 
@@ -162,9 +177,7 @@
             },
             closeAddForm(){
                 this.addFormVisible = true
-                this.review.author = ""
-                this.review.occ = ""
-                this.review.text = ""
+
             }
 
 

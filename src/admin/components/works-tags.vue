@@ -3,7 +3,9 @@ label.group__label(for="tags")
     .group__label-text Добавление тэга
     input.group__input-works(v-model="tagsString" name="tags" @input="buildTagsArray")
     ul.group__tags
-        li(v-for="(tag, index) in tagsArray"  :key="index" @click="removeTag").group__tags-item {{tag}}
+        li(v-for="(tag, index) in tagsArray"  :key="index" ).group__tags-item
+            .group__tags-text {{tag}}
+            .group__tags-button(@click.prevent="removeTag(index)")
 
 </template>
 

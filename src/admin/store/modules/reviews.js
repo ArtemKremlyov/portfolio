@@ -54,9 +54,10 @@ export default {
                 generateStdError(error);
             }
         },
-        async fetchReviews({commit}) {
+        async fetchReviews({commit,rootGetters}) {
             try{
-                const {data} = await this.$axios.get("/reviews/194")
+                const userId = rootGetters["user/userId"]
+                const {data} = await this.$axios.get(`/reviews/${userId}`)
                 commit("SET_REVIEW",data)
                 console.log(data)
 
@@ -68,7 +69,7 @@ export default {
         async updateReviews({commit},review){
            try{
                const {data} = await this.$axios.post(`/reviews/${review.id}`,review)
-               commit("UPDATE_REVIEW", data)
+               commit("UPDATE_REVIEW", review)
            }
            catch (e) {
                 console.log(e)

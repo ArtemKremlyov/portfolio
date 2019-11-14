@@ -3,14 +3,14 @@
     .group__row-input {{skill.title}}
     .group__adding-percent {{skill.percent}}
     .group__row-btns
-        button(@click="editMode = true").pencil
-        button(@click="removeExistedSkill").trash
+        button(@click.prevent="editMode = true").pencil
+        button(@click.prevent="removeExistedSkill").trash
 .group__row(v-else)
     input(type="text" v-model="editedSkill.title").group__row-input
     input(type="number" v-model="editedSkill.percent").group__adding-percent
     .group__row-btns
-        button(@click="editExistedSkill").ok-btn
-        button(@click="editMode = false").canselled-btn
+        button(@click.prevent="editExistedSkill").ok-btn
+        button(@click.prevent="editMode = false").canselled-btn
 
 </template>
 

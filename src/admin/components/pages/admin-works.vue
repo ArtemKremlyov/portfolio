@@ -8,7 +8,7 @@
                 .group__separator
                 .group__content.group__content--works
                     .group__column
-                        .group__row
+                        .group__row(v-if="mode==='new'")
                             label.group__upload
                                 .group__uploaded(
                                     :class="{filled: renderedPhoto.length}"
@@ -18,6 +18,25 @@
                                     img(src="../../../images/content/mobile-img.png").group__upload-adaptive
                                     button.group__upload-edit Изменить превью
                                 .group__upload-desktop(:class="{none: renderedPhoto.length}")
+                                    .group__upload-text Перетащите или загрузите для загрузки изображения
+                                    input(type="file" @change="appendFileRenderPhoto").group__upload-img
+                                    button(@click.prevent).group__btn.group__btn--upload Загрузить
+                        .group__row.edit(v-else-if="mode==='edit'")
+                            label.group__upload
+                                .group__uploaded(
+                                    v-if="renderedPhoto.length"
+                                    :class="{filled: renderedPhoto.length}"
+                                    :style="{backgroundImage: `url(${renderedPhoto})`}"
+                                )
+                                .group__uploaded(
+                                    v-else
+                                    :class="{filled: renderedPhoto.length}"
+                                    :style="{backgroundImage: `url(${image})`}"
+                                )
+                            .group__upload-tablets
+                                img(src="../../../images/content/mobile-img.png").group__upload-adaptive
+                                button.group__upload-edit Изменить превью
+                            .group__upload-desktop()
                                     .group__upload-text Перетащите или загрузите для загрузки изображения
                                     input(type="file" @change="appendFileRenderPhoto").group__upload-img
                                     button.group__btn.group__btn--upload Загрузить
@@ -43,7 +62,7 @@
                                 @defineTagsString="defineTagsString"
                             )
                 .group__controls
-                    button.group__controls-cancell Отменить
+                    button.group__controls-cancell(@click.prevent="closeAddForm") Отменить
                     button.group__btn(@click.prevent="mode=='new' ? addWork() : updateUserWork()") Сохранить
         .works__section
             .works__item.works__item--adding.works__item--line
@@ -55,23 +74,16 @@
                 :key="works.id"
                 :work="work"
                 @editUserWork="showAddForm('edit')"
+                @image="newImage()"
                 )
 </template>
 
 <script>
-    import {mapActions,mapState} from "vuex"
+    import {mapActions,mapState,mapGetters} from "vuex"
     export default {
         components:{
             worksItem : () => import("../works-item.vue"),
             worksTags : () => import("../works-tags.vue")
-        },
-        computed:{
-            ...mapState("works",{
-                works:state => state.works
-            }),
-            ...mapState("works",{
-                currentWork:state => state.currentWork
-            }),
         },
         data: () =>({
           renderedPhoto:"",
@@ -101,6 +113,17 @@
                 this.getCurrentWork()
             }
         },
+        computed:{
+            ...mapState("works",{
+                works:state => state.works
+            }),
+            ...mapState("works",{
+                currentWork:state => state.currentWork
+            }),
+            image: function() {
+                return `https://webdev-api.loftschool.com/${this.currentWork.photo}`
+            },
+        },
         watch:{
             currentWork(){
                 if(this.mode === "edit") this.getCurrentWork()
@@ -112,11 +135,15 @@
                 else{
                     this.work = {}
                     this.photoUrl = ""
+                    this.work.techs = ''
                 }
             },
+
         },
         methods:{
+            ...mapGetters('user',["userId"]),
             ...mapActions("works",["addNewWork", "fetchWorks","updateWorks"]),
+            ...mapActions("message",["showTooltip"]),
             appendFileRenderPhoto(e){
                 const file = e.target.files[0]
                 this.work.photo = file
@@ -133,13 +160,24 @@
 
                 }
             },
+            newImage(){
+                console.log(this.image)
+                return this.image
+            },
             async updateUserWork(){
                 try{
                     console.log('dwdw')
-                    await this.updateWorks(this.work)
+                    await this.updateWorks(this.work,this.image)
+                    this.showTooltip({
+                        type: "success",
+                        text: "Запись обновлена!"
+                    });
                 }
                 catch (e) {
-
+                    this.showTooltip({
+                        type: "error",
+                        text: e
+                    });
                 }
             },
             validateTitle(){
@@ -182,9 +220,17 @@
                 try{
                     await this.addNewWork(this.work)
                     console.log("okey")
+                    this.showTooltip({
+                        type: "success",
+                        text: "Работа успешно добавлена!"
+                    });
                 }
                 catch (e) {
                     console.log(e)
+                    this.showTooltip({
+                        type: "error",
+                        text: e
+                    });
                 }
             },
             getCurrentWork(){
@@ -196,9 +242,16 @@
                 this.addFormVisible = false;
                 if(mode==="new"){
                     this.work.techs = ""
+                    this.work.title = ""
+                    this.work.description = ""
+                    this.work.photo = ""
+                    this.work.link = ""
                 }
             },
+            closeAddForm(){
+                this.addFormVisible = true
 
+            }
         },
 
     }
@@ -237,6 +290,15 @@
         @include tablets{
         // flex-direction: column;
         }
+        &.edit{
+            flex-direction: column;
+            margin-right: 15px;
+            align-items: center;
+
+            .group__uploaded{
+                display: block;
+            }
+        }
     }
     .group__controls{
         display: flex;
@@ -273,16 +335,15 @@
         padding: 10px 25px 10px 15px;
         position: relative;
         background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
 
-        &:after{
-            content: '';
-            position: absolute;
-            right: 8px;
-            bottom: 14px;
-            width: 11px;
-            height: 11px;
-            background: svg-load("remove.svg",fill="#414c63",width="11px",height="11px") center center no-repeat;
-        }
+    }
+    .group__tags-button{
+        width: 11px;
+        height: 11px;
+        background: svg-load("remove.svg",fill="#414c63",width="11px",height="11px") center center no-repeat;
+        margin-left: 7px;
     }
     .group__textarea{
         border: 1px solid #414c63;
@@ -365,6 +426,9 @@
         width: 100%;
         height: 100%;
         position: absolute;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
         &.filled{
             display: block;
         }
@@ -384,6 +448,10 @@
             border: none;
             height: 215px;
             margin-bottom: 30px;
+        }
+
+        &.edit{
+
         }
     }
     .group__upload-edit{

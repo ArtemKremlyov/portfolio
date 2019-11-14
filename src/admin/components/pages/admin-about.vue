@@ -2,20 +2,15 @@
 .container.container--abou
     .about__flex
         .about__flex-headline Блок «Обо мне»
-        button.about__flex-adding Добавить группу
+        button.about__flex-adding(@click="togleForm") Добавить группу
     .about__section
-        form(@submit.prevent="addNewCategory").group.group--skills
+        form(@submit.prevent="addNewCategory" :class="{visible: visible}").group.group--skills--add
             .group__title
                 input(value="Название новой группы" v-model="title").group__input
                 .group__tittle-controls
                     button.ok-btn
-                    button.canselled-btn
-            hr.group__separator
-            .group__content
-            .group__adding
-                input(type="text" value="Новый навык").group__adding-input
-                input(type="number" min="0" max="100").group__adding-percent
-                button.group__adding-plus
+                    button.canselled-btn(@click.prevent="togleForm")
+
         ul.about__list
                 aboutGroup(
                     :category="category"
@@ -31,6 +26,7 @@
         },
         data: () => ({
             title: "",
+            visible:false
         }),
         created(){
             this.fetchCategories();
@@ -43,6 +39,9 @@
         methods: {
             ...mapActions("categories",["addCategory", "fetchCategories"]),
             ...mapActions("message",["showTooltip"]),
+           togleForm(){
+                this.visible = !this.visible
+           } ,
            async addNewCategory() {
                try {
                   await this.addCategory(this.title)
@@ -409,6 +408,15 @@
         &--skills{
             width: calc(100%/2 - 2*10px);
             margin-bottom: 25px;
+            
+            &--add{
+                display: none;
+                width: calc(100%/2 - 2*10px);
+                margin-bottom: 25px;
+                &.visible{
+                    display: block;
+                }
+            }
             @include phones{
                 width: 100%;
             }
@@ -426,6 +434,7 @@
                 flex-direction: column;
             }
         }
+
     }
     .group__title{
         display: flex;

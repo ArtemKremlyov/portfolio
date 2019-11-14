@@ -37,22 +37,32 @@
         computed:{
            image:function () {
                return `https://webdev-api.loftschool.com/${this.work.photo}`
+               console.log(this.image)
            }
         },
         methods:{
             ...mapMutations("works",["SET_CURRENT_WORK"]),
             ...mapActions("works",["removeWork"]),
+            ...mapActions("message",["showTooltip"]),
             async removeThisWork(){
                 try{
                     await this.removeWork(this.work.id)
+                    this.showTooltip({
+                        type: "success",
+                        text: "Работа успешно удалена!"
+                    });
                 }
                 catch (e) {
-
+                    this.showTooltip({
+                        type: "error",
+                        text: e
+                    });
                 }
             },
             editUserWork(){
                 this.SET_CURRENT_WORK(this.work.id)
                 this.$emit("editUserWork")
+                this.$emit("image",this.image)
             }
         }
 
