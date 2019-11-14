@@ -71,6 +71,7 @@
 
     .group__adding-percent{
         color: black;
+        max-width: 20%;
     }
     .pencil{
         width: 16px;
@@ -157,27 +158,7 @@
         display: flex;
         margin-top: 20px;
     }
-    .group__tags-item{
-        opacity: 0.7;
-        color: #283340;
-        font-family: "Open Sans";
-        font-size: 13px;
-        font-weight: 600;
-        border-radius: 50%;
-        padding: 10px 25px 10px 15px;
-        position: relative;
-        background-color: #f4f4f4;
-
-        &:after{
-            content: '';
-            position: absolute;
-            right: 8px;
-            bottom: 14px;
-            width: 11px;
-            height: 11px;
-            background: svg-load("remove.svg",fill="#414c63",width="11px",height="11px") center center no-repeat;
-        }
-    }
+ 
     .group__textarea{
         border: 1px solid #414c63;
         min-height: 150px;

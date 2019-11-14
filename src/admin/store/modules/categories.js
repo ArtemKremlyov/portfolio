@@ -48,7 +48,7 @@ export default {
     actions:{
        async addCategory({commit},title) {
                 try {
-                   const {data} = await this.$axios.post("/categories",{title : title})
+                   const {data} = await this.$axios.post("/categories",{title})
                     commit("ADD_CATEGORY",data)
                 }
                 catch (error) {

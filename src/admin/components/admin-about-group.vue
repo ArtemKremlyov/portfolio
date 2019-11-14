@@ -2,16 +2,16 @@
 li.group.group--skills
     form.group.group--skill
         .group__line
-            .group__title(v-if="editMode === false")
-                input(v-model="category.category").group__input
+            .group__title(v-if="editMode === 'false'")
+                .group__input {{category.category}}
                 .group__tittle-controls
-                    button.pencil
+                    button(@click.prevent="editTitle").pencil
                     button(@click.prevent="removeSkillCategory").trash
             .group__title(v-else)
                 input(v-model="category.category").group__input
                 .group__tittle-controls
                     button.ok-btn
-                    button(@click.prevent="removeSkillCategory").canselled-btn
+                    button(@click.prevent="cancellEdit").canselled-btn
         hr.group__separator
         .group__content
             group-content(
@@ -24,7 +24,7 @@ li.group.group--skills
             .tooltip.tooltip--skill {{inputError}}
             input(type="number" min="0" max="100" v-model="skill.percent" @input="validatePercent").group__adding-percent
             .tooltip.tooltip--skill--percent {{percentError}}
-            button(@click="addNewSkill").group__adding-plus
+            button(@click.prevent="addNewSkill").group__adding-plus
 
 </template>
 
@@ -79,6 +79,13 @@ li.group.group--skills
                         text: e
                     });
                 }
+            },
+            editTitle(){
+                this.editMode = 'true'
+            },
+            cancellEdit(){
+                this.editMode = 'false'
+                console.log("edit mode is false")
             },
             ...mapActions("categories",["removeCategory"]),
             async removeSkillCategory(){
