@@ -224,7 +224,7 @@
             },
             async addWork(){
                 try{
-                    if(this.descriptionValid && this.titleValid && this.linkValid){
+                    if(this.descriptionValid && this.titleValid && this.linkValid && this.renderedPhoto.length){
                     await this.addNewWork(this.work)
                     console.log("okey")
                     this.showTooltip({

@@ -2,7 +2,7 @@
 .works__item.works__item--line
     .works__pic
         ul.works__tags
-            li.works__tags-item(v-for="tags in tagsArray" :key="tags.id") {{work.techs}}
+            li.works__tags-item(v-for="tags in tagsArray" :key="tags.id") {{tags}}
 
         .works__img(:style="{backgroundImage: `url(${image})`}")
     .works__content
@@ -36,7 +36,7 @@
         },
         watch:{
            tagsArray(){
-               this.work.techs = this.tagsArray
+               this.work.techs = this.tagsArray()
            }
         },
         computed:{
@@ -68,6 +68,7 @@
                 this.SET_CURRENT_WORK(this.work.id)
                 this.$emit("editUserWork")
                 this.$emit("image",this.image)
+                console.log(this.tagsArray)
             }
         }
 

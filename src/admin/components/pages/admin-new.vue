@@ -151,7 +151,7 @@
             },
             async updateUserRev(){
                 try{
-                    if(this.photoValid && this.textValid && this.occValid && this.authorValid){
+                    if(this.photoUrl.length && this.textValid && this.occValid && this.authorValid && this.review.author.length){
                     console.log('dwdw')
                     await this.updateReviews(this.review,this.photoUrl)
                     this.showTooltip({
