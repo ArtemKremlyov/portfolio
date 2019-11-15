@@ -1,7 +1,8 @@
 <template lang="pug">
-label.group__label(for="tags")
+label.group__label(for="tags" :class="{error: !techsValid}")
     .group__label-text Добавление тэга
     input.group__input-works(v-model="tagsString" name="tags" @input="buildTagsArray")
+    .tooltip {{techsError}}
     ul.group__tags
         li(v-for="(tag, index) in tagsArray"  :key="index" ).group__tags-item
             .group__tags-text {{tag}}
@@ -22,7 +23,9 @@ label.group__label(for="tags")
         data() {
             return {
                 tagsString:"",
-                tagsArray:[]
+                tagsArray:[],
+                techsValid : "false",
+                techsError : "",
             }
         },
         watch:{
@@ -35,8 +38,20 @@ label.group__label(for="tags")
             }
         },
         methods:{
+            validateTechs(){
+                if (this.tagsString.length < 1){
+                    this.techsValid = false
+                    this.techsError = "Минимум 1 тэг!"
+                }
+                else{
+                    this.techsValid = true;
+                    this.techsError = ""
+                }
+                return this.techsValid;
+            },
             buildTagsArray(){
                 this.tagsArray = (this.tagsString.length === 0) ? [] : this.tagsString.split(',');
+                this.validateTechs()
             },
             removeTag(index) {
                 this.tagsArray.splice(index,1);

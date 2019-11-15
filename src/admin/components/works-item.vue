@@ -2,7 +2,7 @@
 .works__item.works__item--line
     .works__pic
         ul.works__tags
-            li.works__tags-item(v-for="tags in tagsArray" :key="tags.id") {{tags}}
+            li.works__tags-item(v-for="tags in tagsArray" :key="tags.id") {{work.techs}}
 
         .works__img(:style="{backgroundImage: `url(${image})`}")
     .works__content
@@ -33,6 +33,11 @@
             return {
                 tagsArray: this.work.techs.split(",")
             }
+        },
+        watch:{
+           tagsArray(){
+               this.work.techs = this.tagsArray
+           }
         },
         computed:{
            image:function () {

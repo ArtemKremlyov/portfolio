@@ -28,19 +28,19 @@
                             .group__left-text Изменить фото
                     .group__right
                         .group__row
-                            label.group__label
+                            label.group__label(:class="{error: !authorValid}")
                                 .group__label-text Имя автора
-                                input(type="text" v-model="review.author").group__input-new
-                                .tooltip
-                            label.group__label
+                                input(type="text" v-model="review.author" @input="validateAuthor").group__input-new
+                                .tooltip {{authorError}}
+                            label.group__label(:class="{error: !occValid}")
                                 .group__label-text Титул автора
-                                input(type="text" v-model="review.occ").group__input-new
-                                .tooltip
+                                input(type="text" v-model="review.occ" @input="validateOcc").group__input-new
+                                .tooltip {{occError}}
                         .group__row
-                            label.group__label
+                            label.group__label(:class="{error: !textValid}")
                                 .group__label-text Отзыв
-                                textarea(type="text" v-model="review.text").group__textarea
-                                .tooltip
+                                textarea(type="text" v-model="review.text" @input="validateText").group__textarea
+                                .tooltip {{textError}}
                         .group__controls
                             button(@click.prevent="closeAddForm").group__controls-cancell Отменить
                             button(@click.prevent="mode=='new' ? addNewReview() : updateUserRev()").group__btn Сохранить
@@ -73,7 +73,15 @@
             },
             test:"true",
             mode:"",
-            addFormVisible:true
+            addFormVisible:true,
+            authorValid: "false",
+            authorError: "",
+            occValid: "false",
+            occError:"",
+            textValid:"false",
+            textError:"",
+            photoValid:'false',
+            photoError:""
         }),
         created() {
             this.fetchReviews()
@@ -90,10 +98,11 @@
             mode(){
                 if(this.mode === "edit") {
                     this.getCurrentRev()
+                    this.photoUrl = ""
                 }
                 else{
                     this.review = {}
-                    //this.photoUrl = ""
+                    this.photoUrl = ""
                 }
             },
         },
@@ -115,19 +124,23 @@
             ...mapActions("reviews",["addReview","fetchReviews","updateReviews"]),
             async addNewReview(){
                try{
-
+                if(this.photoValid && this.textValid && this.occValid && this.authorValid){
                 const response = await this.addReview(this.review)
                 console.log("Ok")
                 this.review.photo = ""
                 this.review.occ = ""
                 this.review.text = ""
                 this.review.author = ""
+                 this.photoUrl = ""
                    console.log("wdwdwd")
 
                    this.showTooltip({
                        type: "success",
                        text: "Отзыв успешно добавлен!"
-                   });
+                   });}
+                else{
+
+                }
                }
                 catch (error) {
                     this.showTooltip({
@@ -138,8 +151,13 @@
             },
             async updateUserRev(){
                 try{
+                    if(this.photoValid && this.textValid && this.occValid && this.authorValid){
                     console.log('dwdw')
                     await this.updateReviews(this.review,this.photoUrl)
+                    this.showTooltip({
+                        type: "success",
+                        text: "Запись обновлена!"
+                    })}
                 }
                 catch (e) {
 
@@ -162,6 +180,50 @@
                 catch (e) {
 
                 }
+            },
+            validateAuthor(){
+                if (this.review.author.length < 3){
+                    this.authorValid = false
+                    this.authorError = "Короткое имя пользователя"
+                }
+                else{
+                    this.authorValid = true;
+                    this.authorError = ""
+                }
+                return this.authorValid;
+            },
+            validateOcc(){
+                if (this.review.occ.length < 3){
+                    this.occValid = false
+                    this.occError = "Короткое имя пользователя"
+                }
+                else{
+                    this.occValid = true;
+                    this.occError = ""
+                }
+                return this.occValid;
+            },
+            validateText(){
+                if (this.review.text.length < 10){
+                    this.textValid = false
+                    this.textError = "Короткое имя пользователя"
+                }
+                else{
+                    this.textValid = true;
+                    this.textError = ""
+                }
+                return this.textValid;
+            },
+            validatePhoto(){
+               if (this.photo.length){
+                   this.photoValid = true
+                   this.textError = ""
+               }
+               else{
+                   this.photoValid = "Фотография должна быть загружена!"
+                   this.photoValid = false
+               }
+               return this.photoValid
             },
             hideThisForm(){
                 this.addFormVisible = !this.addFormVisible
@@ -192,6 +254,186 @@
 
     .new__personal{
         display: flex;
+    }
+    .group__row-btns{
+        display: flex;
+        margin-left: 20px;
+    }
+    .group__row{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        width: 100%;
+        @include tablets{
+        // flex-direction: column;
+        }
+        &.edit{
+            flex-direction: column;
+            margin-right: 15px;
+            align-items: center;
+
+            .group__uploaded{
+                display: block;
+            }
+        }
+    }
+    .group__label-text{
+        opacity: 0.5;
+        color: #414c63;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .group__controls{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+
+        @include tablets{
+            justify-content: center;
+        }
+    }
+    .group__btn{
+        border-radius: 25px;
+        color: white;
+        background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 20px 40px;
+
+        @include phones{
+            padding: 17px 28px;
+        }
+
+        &--upload {
+            padding: 15px 50px;
+
+        }
+
+
+    }
+    .group__textarea{
+        border: 1px solid #414c63;
+        min-height: 150px;
+        padding: 20px 20px;
+        color: #414c63;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .group__separator{
+        margin:15px 0;
+        background-color: #1f232d;
+        opacity: 0.15;
+        height: 1px;
+    }
+    .group-works__title{
+        color: #414c63;
+        font-family: "Open Sans";
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .group__controls-cancell{
+        color: #383bcf;
+        font-family: "Open Sans";
+        font-size: 16px;
+        background: transparent;
+        font-weight: 600;
+        margin-right: 60px;
+
+        @include phones{
+            margin-right: 10px;
+        }
+    }
+    .group__label{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-right: 30px;
+
+        @include tablets{
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+    }
+    .group{
+        padding: 30px;
+        box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
+
+        &--skills{
+            width: calc(100%/2 - 2*10px);
+            margin-bottom: 25px;
+            @include phones{
+                width: 100%;
+            }
+        }
+        &--works{
+            width: 100%;
+            &.hide{
+                display: none;
+            }
+        }
+        &--new{
+            width: 100%;
+            display: flex;
+            &.hide{
+                display: none;
+            }
+            @include tablets{
+                justify-content: center;
+            }
+            @include phones{
+                flex-direction: column;
+            }
+        }
+    }
+    .works__item-btn,.new__item-btn{
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        @include phones{
+            flex-direction: row;
+        }
+    }
+    .works__item-text,.new__text{
+        color: #ffffff;
+        font-family: "Open Sans";
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .works__item-plus,.new__item-plus{
+        width: 150px;
+        height: 150px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+
+        &:before{
+            content: "+";
+            color: #ffffff;
+            font-family: "Open Sans";
+            font-size: 72px;
+            font-weight: 300;
+            @include phones{
+                font-size: 24px;
+            }
+        }
+        @include phones{
+            width: 70px;
+            height: 70px;
+            margin-bottom: 0;
+            margin-right: 25px;
+        }
     }
     .group__input-new{
         width: 100%;
@@ -330,7 +572,6 @@
         border-radius: 50%;
         overflow: hidden;
         background-position: center center;
-        background: red;
         margin-right: 12px;
     }
     .new__section{

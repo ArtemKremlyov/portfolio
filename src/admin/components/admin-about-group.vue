@@ -7,8 +7,9 @@ li.group.group--skills
                 .group__tittle-controls
                     button(@click.prevent="editTitle").pencil
                     button(@click.prevent="removeSkillCategory").trash
-            .group__title(v-else)
-                input(v-model="category.category").group__input
+            .group__title(v-else)(:class="{error: !titleValid}")
+                input(v-model="editedTitle.category" @input="validateTitle").group__input
+                .tooltip.tooltip--skill {{titleError}}
                 .group__tittle-controls
                     button(@click.prevent="updateTitle").ok-btn
                     button(@click.prevent="cancellEdit").canselled-btn
@@ -59,8 +60,10 @@ li.group.group--skills
                 inputError : "",
                 percentValid : "false",
                 percentError : "",
+                titleValid:  "false",
+                titleError: "",
                 editMode: "false",
-                editedTitle : {...this.category.category}
+                editedTitle : {...this.category}
             }
         },
         methods:{
@@ -69,9 +72,14 @@ li.group.group--skills
             ...mapActions("categories",["updateThisTitle"]),
             async updateTitle(){
                 try{
+                    if(this.titleValid){
                     this.editMode="false"
-                    await this.updateThisTitle(this.editedTitle.split())
-                    console.log(this.editedTitle.split())
+                    await this.updateThisTitle(this.editedTitle)
+                    console.log(this.category.id)
+                    this.showTooltip({
+                        type: "success",
+                        text: "Запись обновлена!"
+                    })}
                 }
                 catch (e) {
 
@@ -79,6 +87,7 @@ li.group.group--skills
             },
             async addNewSkill(){
                 try{
+                   if(this.percentValid && this.inputValid ){
                     const response = await this.addSkill(this.skill)
                     this.skill.title = ""
                     this.skill.percent = ""
@@ -87,7 +96,7 @@ li.group.group--skills
                     this.showTooltip({
                         type: "success",
                         text: "Скилл успешно добавлен"
-                    });
+                    });}
                 }
                 catch (e) {
                     console.log(e)
@@ -132,10 +141,25 @@ li.group.group--skills
                 }
                 return this.inputValid;
             },
+            validateTitle(){
+                if (this.editedTitle.category.length < 3){
+                    this.titleValid = false
+                    this.titleError = "Короткое имя категории"
+                }
+                else{
+                    this.titleValid = true;
+                    this.titleError = ""
+                }
+                return this.titleValid;
+            },
             validatePercent(){
-                if (this.skill.percent >= 0){
+                if (this.skill.percent <= 0){
                     this.percentValid = false
                     this.percentError = "Скилл не может быть равен 0!"
+                }
+                else if (this.skill.percent >=100){
+                    this.percentValid = false
+                    this.percentError = "Скилл не может превышать 100%"
                 }
                 else{
                     this.percentValid = true;

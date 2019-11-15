@@ -2,14 +2,15 @@
 .container.container--abou
     .about__flex
         .about__flex-headline Блок «Обо мне»
-        button.about__flex-adding(@click="togleForm") Добавить группу
+        button.about__flex-adding(@click.prevent="addNewCategory") Добавить группу
     .about__section
-        form(@submit.prevent="addNewCategory" :class="{visible: visible}").group.group--skills--add
+        form.group.group--skills--add
             .group__title
                 input(value="Название новой группы" v-model="title").group__input
                 .group__tittle-controls
                     button.ok-btn
                     button.canselled-btn(@click.prevent="togleForm")
+
 
         ul.about__list
                 aboutGroup(
@@ -26,7 +27,7 @@
             aboutGroup : () => import("../admin-about-group.vue")
         },
         data: () => ({
-            title: "",
+            title: "Введите название группы",
             visible:false
         }),
         created(){
@@ -128,8 +129,15 @@
     .group__row{
         display: flex;
         justify-content: space-around;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         width: 100%;
+        position: relative;
+
+        &.error{
+            .tooltip{
+                display: block;
+            }
+        }
         @include tablets{
         // flex-direction: column;
         }
@@ -421,6 +429,13 @@
     .group__title{
         display: flex;
         justify-content: space-between;
+        position: relative;
+
+        &.error{
+            .tooltip{
+                display: block;
+            }
+        }
     }
     .group__input{
         border: none;

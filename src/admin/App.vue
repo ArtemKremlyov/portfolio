@@ -44,7 +44,11 @@
         border-width: 0 7.5px 7px;
     }
     &--skill{
-        right: 51%;
+        right: 50%;
+
+        &--percent{
+            right: 0;
+        }
     }
 
 }

@@ -131,6 +131,9 @@
             mode(){
                 if(this.mode === "edit") {
                     this.getCurrentWork()
+                    this.titleValid = "true"
+                    this.linkValid = "true"
+                    this.descriptionValid = "true"
                 }
                 else{
                     this.work = {}
@@ -166,12 +169,14 @@
             },
             async updateUserWork(){
                 try{
+                   if(this.titleValid && this.linkValid && this.descriptionValid){
                     console.log('dwdw')
                     await this.updateWorks(this.work,this.renderedPhoto)
                     this.showTooltip({
                         type: "success",
                         text: "Запись обновлена!"
-                    });
+                    });}
+
                 }
                 catch (e) {
                     this.showTooltip({
@@ -183,7 +188,7 @@
             validateTitle(){
                 if (this.work.title.length < 3){
                     this.titleValid = false
-                    this.titleError = "Короткое имя пользователя"
+                    this.titleError = "Короткое название"
                 }
                 else{
                     this.titleValid = true;
@@ -191,6 +196,7 @@
                 }
                 return this.titleValid;
             },
+
             validateLink(){
                 if (this.work.link.length < 5){
                     this.linkValid = false
@@ -218,19 +224,19 @@
             },
             async addWork(){
                 try{
+                    if(this.descriptionValid && this.titleValid && this.linkValid){
                     await this.addNewWork(this.work)
                     console.log("okey")
                     this.showTooltip({
                         type: "success",
                         text: "Работа успешно добавлена!"
-                    });
+                    });}
+                    else {
+                        this.linkError="jff"
+                    }
                 }
                 catch (e) {
                     console.log(e)
-                    this.showTooltip({
-                        type: "error",
-                        text: e
-                    });
                 }
             },
             getCurrentWork(){
@@ -333,7 +339,7 @@
         font-family: "Open Sans";
         font-size: 13px;
         font-weight: 600;
-        border-radius: 50%;
+        border-radius: 20px;
         padding: 10px 25px 10px 15px;
         position: relative;
         background-color: #f4f4f4;

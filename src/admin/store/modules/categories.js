@@ -43,6 +43,9 @@ export default {
             }
             state.categories = state.categories.map(findRequiredCategory)
 
+        },
+        EDIT_TITLE(state,editedTitle){
+            state.categories = state.categories.map(title => title.id === editedTitle.id ? editedTitle : title)
         }
     },
     actions:{
@@ -79,10 +82,11 @@ export default {
 
            }
         },
-        async updateThisTitle({commit},{editedTitle:title}){
+        async updateThisTitle({commit},editedTitle){
            try{
-               const {data} = await  this.$axios.post(`/categories/${editedTitle.id}`,editedTitle)
+               const {data} = await this.$axios.post(`/categories/${editedTitle.id}`,{title:editedTitle.category})
                console.log(data)
+               commit("EDIT_TITLE",editedTitle)
            }
            catch (e) {
 
