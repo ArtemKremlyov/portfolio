@@ -10,7 +10,7 @@ li.group.group--skills
             .group__title(v-else)
                 input(v-model="category.category").group__input
                 .group__tittle-controls
-                    button.ok-btn
+                    button(@click.prevent="updateTitle").ok-btn
                     button(@click.prevent="cancellEdit").canselled-btn
         hr.group__separator
         .group__content
@@ -40,6 +40,11 @@ li.group.group--skills
                 default: () => ({}),
                 required: true,
             },
+            title:{
+                type:String,
+                default:() => ({}),
+                required: true
+            }
 
 
         },
@@ -54,12 +59,24 @@ li.group.group--skills
                 inputError : "",
                 percentValid : "false",
                 percentError : "",
-                editMode: "false"
+                editMode: "false",
+                editedTitle : {...this.category.category}
             }
         },
         methods:{
             ...mapActions("message", ["showTooltip"]),
             ...mapActions("skills",["addSkill", "removeCategory"]),
+            ...mapActions("categories",["updateThisTitle"]),
+            async updateTitle(){
+                try{
+                    this.editMode="false"
+                    await this.updateThisTitle(this.editedTitle.split())
+                    console.log(this.editedTitle.split())
+                }
+                catch (e) {
+
+                }
+            },
             async addNewSkill(){
                 try{
                     const response = await this.addSkill(this.skill)

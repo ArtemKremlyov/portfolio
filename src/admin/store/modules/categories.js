@@ -78,6 +78,15 @@ export default {
            catch (error) {
 
            }
+        },
+        async updateThisTitle({commit},{editedTitle:title}){
+           try{
+               const {data} = await  this.$axios.post(`/categories/${editedTitle.id}`,editedTitle)
+               console.log(data)
+           }
+           catch (e) {
+
+           }
         }
     }
 }

@@ -93,7 +93,7 @@
                 }
                 else{
                     this.review = {}
-                    this.photoUrl = ""
+                    //this.photoUrl = ""
                 }
             },
         },
@@ -139,7 +139,7 @@
             async updateUserRev(){
                 try{
                     console.log('dwdw')
-                    await this.updateReviews(this.review)
+                    await this.updateReviews(this.review,this.photoUrl)
                 }
                 catch (e) {
 
@@ -173,7 +173,6 @@
             },
             getCurrentRev(){
               this.review = {...this.currentRev}
-              this.review.photo = ""
             },
             closeAddForm(){
                 this.addFormVisible = true

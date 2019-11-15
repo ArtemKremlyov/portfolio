@@ -66,8 +66,15 @@ export default {
                 generateStdError(error);
             }
         },
-        async updateReviews({commit},review){
+        async updateReviews({commit},review,newPhoto){
            try{
+               const formData = new FormData();
+
+               formData.append("text",review.text)
+               formData.append("author",review.author)
+               formData.append("occ",review.occ)
+               formData.append("photo",review.photo)
+
                const {data} = await this.$axios.post(`/reviews/${review.id}`,review)
                commit("UPDATE_REVIEW", review)
            }

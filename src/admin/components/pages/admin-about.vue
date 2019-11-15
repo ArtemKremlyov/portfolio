@@ -14,6 +14,7 @@
         ul.about__list
                 aboutGroup(
                     :category="category"
+                    :title="title"
                     v-for="category in categories" :key="categories.id"
                 )
 </template>
@@ -158,7 +159,7 @@
         display: flex;
         margin-top: 20px;
     }
- 
+
     .group__textarea{
         border: 1px solid #414c63;
         min-height: 150px;

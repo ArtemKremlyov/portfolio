@@ -68,7 +68,7 @@ export default {
 
                 formData.append("title", work.title)
                 formData.append("techs", work.techs)
-                formData.append("photo", updatedPhoto)
+                formData.append("photo", work.photo)
                 formData.append("link", work.link)
                 formData.append("description", work.description)
 

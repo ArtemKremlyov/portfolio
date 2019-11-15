@@ -167,7 +167,7 @@
             async updateUserWork(){
                 try{
                     console.log('dwdw')
-                    await this.updateWorks(this.work,this.image)
+                    await this.updateWorks(this.work,this.renderedPhoto)
                     this.showTooltip({
                         type: "success",
                         text: "Запись обновлена!"
@@ -235,17 +235,19 @@
             },
             getCurrentWork(){
                 this.work = {...this.currentWork}
-                this.work.photo = ""
+
             },
             showAddForm(mode){
                 this.mode = mode
                 this.addFormVisible = false;
+                this.renderedPhoto = ""
                 if(mode==="new"){
                     this.work.techs = ""
                     this.work.title = ""
                     this.work.description = ""
                     this.work.photo = ""
                     this.work.link = ""
+                    this.renderedPhoto = ""
                 }
             },
             closeAddForm(){
